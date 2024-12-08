@@ -56,7 +56,7 @@ def auth():
         return 'Invalid state parameter', 403
     
     token = google.authorize_access_token()
-    resp = google.get('userinfo')
+    resp = google.get('user_info')
     user_info = resp.json()
     
     # Your user handling logic here
