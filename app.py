@@ -1,6 +1,7 @@
 from flask import Flask, redirect, request, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from authlib.integrations.flask_client import OAuth
+from authlib.common.security import generate_token
 from dotenv import load_dotenv
 
 import os
@@ -8,9 +9,6 @@ import os
 
 # Load variables from .env file
 load_dotenv()
-
-google_client_id = os.getenv('GOOGLE_CLIENT_ID') # hidden creds here
-google_client_secret = os.getenv('GOOGLE_CLIENT_SECRET')
 
 # set up app
 app = Flask(__name__)
@@ -30,43 +28,39 @@ class User(db.Model):
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
-    client_id=google_client_id,   # hidden creds here
-    client_secret=google_client_secret, # hidden creds here
-    access_token_url='https://accounts.google.com/o/oauth2/token',
-    access_token_params=None,
-    authorize_url='https://accounts.google.com/o/oauth2/auth',
-    authorize_params=None,
-    api_base_url='https://www.googleapis.com/oauth2/v1/',
-    client_kwargs={'scope': 'openid email profile'}
+    client_id=os.getenv('GOOGLE_CLIENT_ID'),
+    client_secret=os.getenv('GOOGLE_CLIENT_SECRET'),
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+    client_kwargs={
+        'scope': 'openid email profile'
+    }
 )
 
 # Login Route
 @app.route('/login')
 def login():
+    state = generate_token()
+    session['oauth_state'] = state
     redirect_uri = url_for('auth', _external=True)
-    return google.authorize_redirect(redirect_uri)
+    return google.authorize_redirect(redirect_uri, state=state)
 
 # Authentication Callback
 @app.route('/auth')
 def auth():
+    # Verify state to prevent CSRF
+    if 'oauth_state' not in session:
+        return 'Authentication error', 403
+    
+    # Validate state
+    if request.args.get('state') != session['oauth_state']:
+        return 'Invalid state parameter', 403
+    
     token = google.authorize_access_token()
     resp = google.get('userinfo')
     user_info = resp.json()
     
-    # Find or create user
-    user = User.query.filter_by(google_id=user_info['id']).first()
-    if not user:
-        user = User(
-            google_id=user_info['id'], 
-            email=user_info['email'], 
-            name=user_info['name']
-        )
-        db.session.add(user)
-        db.session.commit()
-    
-    # Set session
-    session['user_id'] = user.id
-    return redirect('/dashboard')
+    # Your user handling logic here
+    return f"Logged in as {user_info['email']}"
 
 # Protected Route
 @app.route('/dashboard')
