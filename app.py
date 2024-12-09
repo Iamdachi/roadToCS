@@ -37,8 +37,12 @@ def signin():
     oauth_flow.redirect_uri = url_for('oauth2callback', _external=True).replace('http://', 'https://')
     authorization_url, state = oauth_flow.authorization_url()
     session['state'] = state
+    
     print("session is: ")
     print(session)
+    
+    print("authorization url is: ")
+    print(authorization_url)
     return redirect(authorization_url)
 
 # This is the endpoint that Google login service redirects back to. It must be added to the "Authorized redirect URIs"
