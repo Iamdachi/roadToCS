@@ -33,6 +33,7 @@ def signin():
     # but externally it's accessed via https, and the redirect_uri has to match that
     oauth_flow.redirect_uri = url_for('oauth2callback', _external=True).replace('http://', 'https://')
     authorization_url, state = oauth_flow.authorization_url()
+    print(state)
     session['state'] = state
     return redirect(authorization_url)
 
