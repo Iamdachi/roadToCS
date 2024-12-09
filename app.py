@@ -23,7 +23,7 @@ oauth_flow = google_auth_oauthlib.flow.Flow.from_client_config(
     scopes=[
         "https://www.googleapis.com/auth/userinfo.email",
         "openid", 
-        "https://www.googleapis.com/auth/userinfo.profile",
+        #"https://www.googleapis.com/auth/userinfo.profile",
     ]
 )
 
@@ -37,7 +37,8 @@ def signin():
     oauth_flow.redirect_uri = url_for('oauth2callback', _external=True).replace('http://', 'https://')
     authorization_url, state = oauth_flow.authorization_url()
     session['state'] = state
-    print(session['state'])
+    print("session is: ")
+    print(session)
     return redirect(authorization_url)
 
 # This is the endpoint that Google login service redirects back to. It must be added to the "Authorized redirect URIs"
@@ -46,6 +47,7 @@ def signin():
 # APIs on behalf of the user.
 @app.route('/oauth2callback')
 def oauth2callback():
+    print("session is: ")
     print(session)
     if not session['state'] == request.args['state']:
         return 'Invalid state parameter', 400
@@ -57,6 +59,8 @@ def oauth2callback():
 # It shows the user info's information if they already are.
 @app.route('/')
 def welcome():
+    print("session is: ")
+    print(session)
     if "access_token" in session:
         user_info = get_user_info(session["access_token"])
         if user_info:
