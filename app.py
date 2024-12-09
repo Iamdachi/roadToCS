@@ -33,8 +33,8 @@ def signin():
     # but externally it's accessed via https, and the redirect_uri has to match that
     oauth_flow.redirect_uri = url_for('oauth2callback', _external=True).replace('http://', 'https://')
     authorization_url, state = oauth_flow.authorization_url()
-    print(state)
     session['state'] = state
+    print(session['state'])
     return redirect(authorization_url)
 
 # This is the endpoint that Google login service redirects back to. It must be added to the "Authorized redirect URIs"
@@ -43,6 +43,7 @@ def signin():
 # APIs on behalf of the user.
 @app.route('/oauth2callback')
 def oauth2callback():
+    print(session['state'])
     if not session['state'] == request.args['state']:
         return 'Invalid state parameter', 400
     oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
