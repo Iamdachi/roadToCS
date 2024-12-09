@@ -44,7 +44,7 @@ def signin():
 def oauth2callback():
     if not session['state'] == request.args['state']:
         return 'Invalid state parameter', 400
-    oauth_flow.fetch_token(authorization_response=request.url # .replace('http:', 'https:'))
+    oauth_flow.fetch_token(authorization_response=request.url) # .replace('http:', 'https:'))
     session['access_token'] = oauth_flow.credentials.token
     return redirect("/")
 
