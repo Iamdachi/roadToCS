@@ -8,9 +8,10 @@ app = Flask('app')
 # `FLASK_SECRET_KEY` is used by sessions. You should create a random string
 # and store it as secret.
 app.secret_key = os.urandom(24) # os.environ.get('FLASK_SECRET_KEY') or 
-
+app.config['SESSION_COOKIE_SECURE'] = True
 # `GOOGLE_APIS_OAUTH_SECRET` contains the contents of a JSON file to be downloaded
 # from the Google Cloud Credentials panel.
+
 oauth_config = json.loads(os.environ['GOOGLE_OAUTH_SECRETS'])
 
 # This sets up a configuration for the OAuth flow
