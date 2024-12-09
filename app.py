@@ -31,7 +31,7 @@ oauth_flow = google_auth_oauthlib.flow.Flow.from_client_config(
 def signin():
     # We rewrite the URL from http to https because inside the Repl http is used, 
     # but externally it's accessed via https, and the redirect_uri has to match that
-    oauth_flow.redirect_uri = url_for('oauth2callback', _external=True) # .replace('http://', 'https://')
+    oauth_flow.redirect_uri = url_for('oauth2callback', _external=True).replace('http://', 'https://')
     authorization_url, state = oauth_flow.authorization_url()
     session['state'] = state
     return redirect(authorization_url)
@@ -44,7 +44,7 @@ def signin():
 def oauth2callback():
     if not session['state'] == request.args['state']:
         return 'Invalid state parameter', 400
-    oauth_flow.fetch_token(authorization_response=request.url) # .replace('http:', 'https:'))
+    oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
     session['access_token'] = oauth_flow.credentials.token
     return redirect("/")
 
