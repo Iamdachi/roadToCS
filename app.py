@@ -89,12 +89,14 @@ def logout():
 #@app.route('/')
 #def index():
 #    return render_template('index.html')
-    
-if __name__ == '__main__':
-    app.run(
-        host='0.0.0.0',
-        port=443,
-        ssl_context=(
-        '/etc/letsencrypt/live/roadtocs.com/fullchain.pem',
-        '/etc/letsencrypt/live/roadtocs.com/privkey.pem'
-    ))
+  
+
+#if __name__ == '__main__':
+#    app.run(
+#       host='0.0.0.0',
+#        port=443,
+#        ssl_context=(
+#        '/etc/letsencrypt/live/roadtocs.com/fullchain.pem',
+#        '/etc/letsencrypt/live/roadtocs.com/privkey.pem'
+#    ))
+# i am told that this is not needed because gunicorn will handel that and not flasl
