@@ -20,7 +20,7 @@ oauth_config = json.loads(os.environ['GOOGLE_OAUTH_SECRETS'])
 oauth_flow = google_auth_oauthlib.flow.Flow.from_client_config(
     oauth_config,
     # scopes define what APIs you want to access on behave of the user once authenticated
-    scopes=["email", "openid"]    ]
+    scopes=["email", "openid"]
 )
 
 # This is entrypoint of the login page. It will redirect to the Google login service located at the
