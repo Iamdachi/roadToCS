@@ -1,4 +1,4 @@
-from flask import Flask, redirect, session, url_for, request
+from flask import Flask, redirect, session, url_for, request, render_template
 import google_auth_oauthlib.flow
 import json
 import os
@@ -69,10 +69,7 @@ def welcome():
                 Your email address is {user_info["email"]}<br>
                 <a href="/logout">Log out</a>
             """
-    return """
-        <h1>Hello!</h1>
-        <a href="/signin">Sign In via Google</a><br>
-    """
+    return render_template("index.html")
 
 # Call the userinfo API to get the user's information with a valid access token.
 # This is the first example of using the access token to access an API on the user's behalf.
