@@ -43,7 +43,7 @@ def signin():
 # APIs on behalf of the user.
 @app.route('/oauth2callback')
 def oauth2callback():
-    print(session['state'])
+    print(type(session['state']))
     if not session['state'] == request.args['state']:
         return 'Invalid state parameter', 400
     oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
