@@ -7,7 +7,7 @@ import requests
 app = Flask('app')
 # `FLASK_SECRET_KEY` is used by sessions. You should create a random string
 # and store it as secret.
-app.secret_key = os.environ.get('FLASK_SECRET_KEY') or os.urandom(24)
+app.secret_key = os.urandom(24) # os.environ.get('FLASK_SECRET_KEY') or 
 
 # `GOOGLE_APIS_OAUTH_SECRET` contains the contents of a JSON file to be downloaded
 # from the Google Cloud Credentials panel.
