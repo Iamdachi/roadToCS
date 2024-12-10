@@ -51,6 +51,9 @@ def oauth2callback():
     print(session)
     if not session['state'] == request.args['state']:
         return 'Invalid state parameter', 400
+  
+    oauth_flow.redirect_uri = url_for('oauth2callback', _external=True).replace('http://', 'https://') # i added this
+
     oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
     session['access_token'] = oauth_flow.credentials.token
     return redirect("/")
