@@ -9,7 +9,7 @@ app = Flask('app')
 # and store it as secret.
 
 app.config['SESSION_COOKIE_SECURE'] = True
-app.secret_key = os.urandom(24) # os.environ.get('FLASK_SECRET_KEY') or 
+app.secret_key = os.environ.get('FLASK_SECRET_KEY') # or os.urandom(24)
 
 # `GOOGLE_APIS_OAUTH_SECRET` contains the contents of a JSON file to be downloaded
 # from the Google Cloud Credentials panel.
@@ -88,19 +88,3 @@ def get_user_info(access_token):
 def logout():
     session.clear()
     return redirect('/')
-
-# Index (mit graph)
-#@app.route('/')
-#def index():
-#    return render_template('index.html')
-  
-
-#if __name__ == '__main__':
-#    app.run(
-#       host='0.0.0.0',
-#        port=443,
-#        ssl_context=(
-#        '/etc/letsencrypt/live/roadtocs.com/fullchain.pem',
-#        '/etc/letsencrypt/live/roadtocs.com/privkey.pem'
-#    ))
-# i am told that this is not needed because gunicorn will handel that and not flasl
