@@ -68,7 +68,7 @@ def welcome():
         user_info = get_user_info(session["access_token"])
         if user_info:
             return f"""
-                Hello {user_info["given_name"]}!<br>
+                Hello {user_info}!<br>
                 Your email address is {user_info["email"]}<br>
                 <a href="/logout">Log out</a>
             """
