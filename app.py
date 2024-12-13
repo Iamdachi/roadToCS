@@ -21,7 +21,7 @@ oauth_config = json.loads(os.environ['GOOGLE_OAUTH_SECRETS'])
 
 # This sets up a configuration for the OAuth flow
 oauth_flow = google_auth_oauthlib.flow.Flow.from_client_config(
-    oauth_config,app.config['SECRET_KEY'] = 'top secret!'
+    oauth_config,
     # scopes define what APIs you want to access on behalf of the user once authenticated
     scopes=["https://www.googleapis.com/auth/userinfo.email", "openid"]
 )
