@@ -108,6 +108,7 @@ def get_user_info(access_token):
 
 @app.route('/logout')
 def logout():
+    session.clear()
     logout_user()
     flash('You have been logged out.')
     return redirect('/')
