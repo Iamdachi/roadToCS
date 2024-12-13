@@ -27,7 +27,6 @@ oauth_flow = google_auth_oauthlib.flow.Flow.from_client_config(
 )
 
 
-
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -113,4 +112,5 @@ def logout():
     return redirect('/')
 
 with app.app_context():
-    db.create_all()
+    db.drop_all()  # Drops all tables
+    db.create_all()  # Creates tables again
