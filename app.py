@@ -1,4 +1,4 @@
-from flask import Flask, redirect, session, url_for, request, render_template
+from flask import Flask, redirect, session, flash, url_for, request, render_template
 import google_auth_oauthlib.flow
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user,\
@@ -108,9 +108,10 @@ def get_user_info(access_token):
 
 @app.route('/logout')
 def logout():
-    session.clear()
+    logout_user()
+    flash('You have been logged out.')
     return redirect('/')
 
 with app.app_context():
-    db.drop_all()  # Drops all tables
+    db.drop_all()  # Drops all tables DELETE THIS LINE LATER!!!
     db.create_all()  # Creates tables again
