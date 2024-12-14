@@ -31,7 +31,7 @@ function draw(data) {
         .on('click', function (event, d) {
           d3.select('#sidebar')
             .classed('active', true) // Add the 'active' class to slide in
-            .html(`<h2>${d.title}</h2><p>Additional details about ${d.title}</p>`); // Add content
+            .append(`<h2>${d.title}</h2><p>Additional details about ${d.title}</p>`); // Add content
         })
         .each(function (d, i) {
           if (i > 0) { // Only draw triangles for rectangles with id > 0
