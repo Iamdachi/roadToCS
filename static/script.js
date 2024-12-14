@@ -13,46 +13,50 @@ function handleZoom(e) {
 		.attr('transform', e.transform);
 }
 
-function draw(data){
+function draw(data) {
   d3.select('svg g')
-  .selectAll('rect')
-  .data(data)
-  .join(
-    enter => enter
-      .append("rect")
-      .attr('x', d => d.x)
-      .attr('y', d => d.y)
-      .attr('width', 250)
-      .attr('height', 80)
-      .attr('fill', 'rgb(123, 24, 40)')
-      .attr('rx', 20)
-      .attr('ry', 20)
-      .attr('id', (d, i) => "n" + i)
-      .each(function(d, i) {
-        if (i > 0) { // Only draw triangles for rectangles with id > 0
-          d3.select(this.parentNode)
-            .append("polygon")
-            .attr("points", () => {
-              const x = d.x + 125;  // Center of the rect horizontally
-              const y = d.y;        // Top edge of the rect
-              return `${x - 15},${y - 20} ${x + 15},${y - 20} ${x},${y}`; // Adjusted to touch by lower vertex
-            })
-            .attr("fill", "white");
-        }
+    .selectAll('rect')
+    .data(data)
+    .join(
+      enter => enter
+        .append("rect")
+        .attr('x', d => d.x)
+        .attr('y', d => d.y)
+        .attr('width', 250)
+        .attr('height', 80)
+        .attr('fill', 'rgb(123, 24, 40)')
+        .attr('rx', 20)
+        .attr('ry', 20)
+        .attr('id', (d, i) => "n" + i)
+        .on('click', function (event, d) { // Add click event listener
+          alert(`You clicked on rectangle with text: ${d.title}`);
+        })
+        .each(function (d, i) {
+          if (i > 0) { // Only draw triangles for rectangles with id > 0
+            d3.select(this.parentNode)
+              .append("polygon")
+              .attr("points", () => {
+                const x = d.x + 125;  // Center of the rect horizontally
+                const y = d.y;        // Top edge of the rect
+                return `${x - 15},${y - 20} ${x + 15},${y - 20} ${x},${y}`; // Adjusted to touch by lower vertex
+              })
+              .attr("fill", "white");
+          }
 
-        // Add title inside the rectangle
-        d3.select(this.parentNode)
-          .append("text")
-          .attr("x", d.x + 125) // Center horizontally
-          .attr("y", d.y + 40)  // Center vertically
-          .attr("fill", "white") // White font color
-          .attr("text-anchor", "middle") // Center text
-          .style("font-family", "Roboto") // Apply the cute font
-          .style("font-weight", "bold") // Set font weight to bold
-          .text(d.title); // Set text from data.title
-      })
-  );
+          // Add title inside the rectangle
+          d3.select(this.parentNode)
+            .append("text")
+            .attr("x", d.x + 125) // Center horizontally
+            .attr("y", d.y + 40)  // Center vertically
+            .attr("fill", "white") // White font color
+            .attr("text-anchor", "middle") // Center text
+            .style("font-family", "Roboto") // Apply the cute font
+            .style("font-weight", "bold") // Set font weight to bold
+            .text(d.title); // Set text from data.title
+        })
+    );
 }
+
 
 
 
@@ -99,7 +103,6 @@ function drawPaths(paths) {
     .attr('fill', 'none') // No fill for the curve
     .attr('stroke', 'white') // Stroke color
     .attr('stroke-width', 2); // Stroke width
-
 }
 
 
