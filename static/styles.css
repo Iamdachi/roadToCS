@@ -9,15 +9,18 @@ body {
 #sidebar {
   position: fixed;
   top: 0;
-  right: -70%; /* Hidden by default, will slide in */
+  right: -70%;
   width: 70%;
   height: 100%;
   background-color: white;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
   overflow-y: auto;
-  transition: right 0.3s ease; /* Smooth slide-in effect */
-  display: none; /* Hidden by default */
+  transition: right 0.3s ease;
+  display: none;
   z-index: 1000;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  padding: 10px;
 }
 
 #sidebar.active {
@@ -26,18 +29,20 @@ body {
 }
 
 #close-btn {
-  position: absolute;
-  top: 10px;
-  left: 10px;
   background-color: #ff0000;
   color: white;
   border: none;
   padding: 10px;
   cursor: pointer;
   font-size: 16px;
+  margin-bottom: 10px; /* Space between button and content */
 }
 
 #close-btn:hover {
   background-color: #cc0000;
 }
 
+#sidebar-content {
+  flex-grow: 1; /* Takes remaining space for content */
+  padding: 10px;
+}
