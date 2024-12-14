@@ -1,43 +1,3 @@
-// Using this two variables I can draw absolutely any kind of roadmap
-const data = [
-
-  { title: "Calculus I", x: 850, y: 200 },
-  { title: "Physics I", x: 1250, y: 400 },
-  { title: "Caclulus II", x: 1550, y: 400 },
-  { title: "Physics II", x: 1550, y: 600 },
-  { title: "MORE MATH", x: 1850, y: 600 },
-
-  { title: "Discrete Math", x: 400, y: 400 },
-  { title: "Introduction To Programming", x: 850, y: 400 },
-  { title: "Introduction To Algorithms", x: 400, y: 600 },
-  { title: "Fundamentals Of Programming", x: 850, y: 600 },
-  { title: "C / Assembly", x: 1250, y: 600 },
-  { title: "Computation Structures", x: 1250, y: 750 },
-
-  { title: "Design and Analysis of Algorithms", x: 400, y: 750 },
-  { title: "Software construction", x: 850, y: 750 },
-  { title: "Computer Systems Engineering", x: 1250, y: 950 },
-
-];
-
-const paths = [
-  ["n0","n5"],
-  ["n0","n1"],
-  ["n0","n2"],
-  ["n5","n7"],
-  ["n6","n7"],
-  ["n6","n8"],
-  ["n6","n9"],
-  ["n1","n3"],
-  ["n2","n4"],
-  ["n9","n10"],
-  ["n3","n10"],
-  ["n10","n13"],
-  ["n8","n12"],
-  ["n7","n11"]
-
-];
-
 let zoom = d3.zoom()
 	.scaleExtent([0.25, 10])
 	.on('zoom', handleZoom);
@@ -53,7 +13,7 @@ function handleZoom(e) {
 		.attr('transform', e.transform);
 }
 
-function draw(){
+function draw(data){
   d3.select('svg g')
   .selectAll('rect')
   .data(data)
@@ -144,8 +104,19 @@ function drawPaths(paths) {
 
 
 initZoom();
-draw();
-console.log(paths);
-drawPaths(paths);
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetch('/mit-roadmap')
+    .then(response => response.json())
+    .then(responseData => {
+      const data = responseData.data;
+      const paths = responseData.paths;
+
+      console.log(data, paths);
+      draw(data);
+      drawPaths(paths);
+    })
+    .catch(error => console.error("Error fetching data:", error));
+});
 
 

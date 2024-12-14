@@ -1,4 +1,4 @@
-from flask import Flask, redirect, session, flash, url_for, request, render_template
+from flask import Flask, jsonify, redirect, session, flash, url_for, request, render_template
 import google_auth_oauthlib.flow
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user,\
@@ -26,13 +26,41 @@ oauth_flow = google_auth_oauthlib.flow.Flow.from_client_config(
     scopes=["https://www.googleapis.com/auth/userinfo.email", "openid"]
 )
 
+# Association table for the many-to-many relationship
+user_courses = db.Table(
+    'user_courses',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('course_id', db.Integer, db.ForeignKey('courses.id'), primary_key=True)
+)
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(64), nullable=True)
+    courses = db.relationship('Course', secondary=user_courses, backref='students')
 
+'''
+class Course(db.Model):
+    __tablename__ = 'courses'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), nullable=False)
+
+'''
+## usage
+'''
+user = User.query.get(1)  # Fetch user with ID 1
+course = Course.query.get(2)  # Fetch course with ID 2
+user.courses.append(course)
+db.session.commit()
+
+user = User.query.get(1)
+print([course.name for course in user.courses])
+
+course = Course.query.get(2)
+print([student.username for student in course.students])
+
+'''
 @login.user_loader
 def load_user(id):
     return db.session.get(User, int(id))
@@ -112,6 +140,12 @@ def logout():
     logout_user()
     flash('You have been logged out.')
     return redirect('/')
+
+@app.route('/mit-roadmap')
+def get_roadmap_data():
+    with open('mit.json') as f:
+        roadmap = json.load(f)
+    return jsonify(roadmap)
 
 with app.app_context():
     db.drop_all()  # Drops all tables DELETE THIS LINE LATER!!!
