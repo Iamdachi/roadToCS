@@ -28,8 +28,10 @@ function draw(data) {
         .attr('rx', 20)
         .attr('ry', 20)
         .attr('id', (d, i) => "n" + i)
-        .on('click', function (event, d) { // Add click event listener
-          alert(`You clicked on rectangle with text: ${d.title}`);
+        .on('click', function (event, d) {
+          d3.select('#sidebar')
+            .classed('active', true) // Add the 'active' class to slide in
+            .html(`<h2>${d.title}</h2><p>Additional details about ${d.title}</p>`); // Add content
         })
         .each(function (d, i) {
           if (i > 0) { // Only draw triangles for rectangles with id > 0

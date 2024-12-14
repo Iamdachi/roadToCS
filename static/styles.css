@@ -5,3 +5,22 @@ body {
     height: 100vh;
     background-color: #2E2E2E;
 }
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  right: -70%; /* Hidden by default, will slide in */
+  width: 70%;
+  height: 100%;
+  background-color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  transition: right 0.3s ease; /* Smooth slide-in effect */
+  display: none; /* Hidden by default */
+  z-index: 1000;
+}
+
+#sidebar.active {
+  right: 0; /* Slide into view */
+  display: block; /* Make visible */
+}
