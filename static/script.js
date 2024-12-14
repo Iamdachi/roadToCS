@@ -57,6 +57,11 @@ function draw(data) {
             .text(d.title); // Set text from data.title
         })
     );
+    // Close sidebar when "esc" button is clicked
+    d3.select('#close-btn').on('click', function() {
+      d3.select('#sidebar')
+        .classed('active', false); // Remove 'active' class to slide out
+    });
 }
 
 
