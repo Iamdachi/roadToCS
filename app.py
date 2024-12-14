@@ -38,15 +38,15 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(64), nullable=True)
-    #courses = db.relationship('Course', secondary=user_courses, backref='students')
+    courses = db.relationship('Course', secondary=user_courses, backref='students')
 
-'''
+
 class Course(db.Model):
     __tablename__ = 'courses'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)
 
-'''
+
 ## usage
 '''
 user = User.query.get(1)  # Fetch user with ID 1
