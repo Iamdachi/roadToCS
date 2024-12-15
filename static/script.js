@@ -40,9 +40,8 @@ function draw(data, lectures) {
           // Fill the existing <ul> with <li> elements
           const ul = d3.select('#sidebar ul');
           ul.selectAll('li').remove(); // Clear previous list items
-          const lecture_items = lectures[i];
+          const lecture_items = lectures[d.id];
           console.log("LOOK HERE!!!");
-          console.log(i);
 
           ul.selectAll('li')
           .data(lecture_items)
