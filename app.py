@@ -148,7 +148,7 @@ def get_roadmap_data():
     return jsonify(roadmap)
 
 @app.route('/mit-lectures')
-def get_roadmap_data():
+def get_lectures_data():
     with open('lectures.json') as f:
         lectures = json.load(f)
     return jsonify(lectures)
