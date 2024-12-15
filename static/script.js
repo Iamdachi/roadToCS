@@ -40,6 +40,8 @@ function draw(data, lectures) {
           const ul = d3.select('#sidebar ul');
           ul.selectAll('li').remove(); // Clear previous list items
           const lecture_items = lectures[i];
+          console.log("LOOK HERE!!!");
+          console.log(i);
 
           ul.selectAll('li')
           .data(lecture_items)
@@ -88,8 +90,6 @@ function drawPaths(paths) {
   // Calculate bezier curve for each path
   const coordinates = [];
   paths.forEach(path => {
-    console.log(path[0]);
-    console.log(path[1]);
     // Start x y
     let x = d3.select(`#${path[0]}`).attr('x');
     console.log(x);
@@ -99,9 +99,6 @@ function drawPaths(paths) {
     const height1 = d3.select(`#${path[0]}`).attr('height');
     x = parseInt(x) + parseInt(widthOne) / 2;
     y = parseInt(y) + parseInt(height1);
-    console.log(typeof x);
-    console.log(x);
-    console.log("HERE I AAM");
 
     // End x y
     let ex = d3.select(`#${path[1]}`).attr('x'); // Use escape for a single digit
@@ -112,7 +109,6 @@ function drawPaths(paths) {
     // Check if any coordinate is null
     if (x !== null && y !== null && ex !== null && ey !== null) {
       const pathString = `M ${x} ${y} C ${x} ${y+50}, ${ex} ${ey-60}, ${ex} ${ey-20}`;
-      console.log(pathString);
       coordinates.push(pathString);
     } else {
       console.warn("Could not find coordinates for path:", path);
@@ -139,6 +135,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(response => response.json())
     .then(responseData => {
       lectures = responseData;
+      console.log("SHOW ME THE LECTURES");
+      console.log(lectures);
     })
 
     fetch('/mit-roadmap')
