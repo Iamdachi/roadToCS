@@ -13,7 +13,7 @@ function handleZoom(e) {
 		.attr('transform', e.transform);
 }
 
-function draw(data) {
+function draw(data, lectures) {
   d3.select('svg g')
     .selectAll('rect')
     .data(data)
@@ -28,12 +28,27 @@ function draw(data) {
         .attr('rx', 20)
         .attr('ry', 20)
         .attr('id', (d, i) => "n" + i)
-        .on('click', function (event, d) {
+        .on('click', function (event, d, i) {
           d3.select('#sidebar')
             .classed('active', true) // Add the 'active' class to slide in
 
           d3.select('#sidebar h2') // Select the <h2> inside the sidebar
             .text(d.title); // Set its content to the title of the clicked rectangle
+
+          // WRITE LIST ITEMS
+          // Fill the existing <ul> with <li> elements
+          const ul = d3.select('#sidebar ul');
+          ul.selectAll('li').remove(); // Clear previous list items
+          const lecture_items = lectures[i];
+
+          ul.selectAll('li')
+          .data(lecture_items)
+          .enter()
+          .append('li')
+          .append('a')
+          .attr('href', d => d.link)
+          .attr('target', '_blank') // Open links in a new tab
+          .text(d => d.title);
         })
         .each(function (d, i) {
           if (i > 0) { // Only draw triangles for rectangles with id > 0
@@ -118,14 +133,21 @@ function drawPaths(paths) {
 initZoom();
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch('/mit-roadmap')
+    let lectures;
+
+    fetch('/mit-lectures')
+    .then(response => response.json())
+    .then(responseData => {
+      lectures = responseData;
+    })
+
+    fetch('/mit-roadmap')
     .then(response => response.json())
     .then(responseData => {
       const data = responseData.data;
       const paths = responseData.paths;
 
-      console.log(data, paths);
-      draw(data);
+      draw(data, lectures);
       drawPaths(paths);
     })
     .catch(error => console.error("Error fetching data:", error));

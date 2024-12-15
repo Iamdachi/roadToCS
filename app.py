@@ -147,6 +147,12 @@ def get_roadmap_data():
         roadmap = json.load(f)
     return jsonify(roadmap)
 
+@app.route('/mit-lectures')
+def get_roadmap_data():
+    with open('lectures.json') as f:
+        lectures = json.load(f)
+    return jsonify(lectures)
+
 with app.app_context():
     db.drop_all()  # Drops all tables DELETE THIS LINE LATER!!!
     db.create_all()  # Creates tables again

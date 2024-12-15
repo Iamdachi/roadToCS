@@ -1,19 +1,19 @@
 {
   "data": [
-    { "title": "Calculus I", "x": 850, "y": 200 },
-    { "title": "Physics I", "x": 1250, "y": 400 },
-    { "title": "Caclulus II", "x": 1550, "y": 400 },
-    { "title": "Physics II", "x": 1550, "y": 600 },
-    { "title": "MORE MATH", "x": 1850, "y": 600 },
-    { "title": "Discrete Math", "x": 400, "y": 400 },
-    { "title": "Introduction To Programming", "x": 850, "y": 400 },
-    { "title": "Introduction To Algorithms", "x": 400, "y": 600 },
-    { "title": "Fundamentals Of Programming", "x": 850, "y": 600 },
-    { "title": "C / Assembly", "x": 1250, "y": 600 },
-    { "title": "Computation Structures", "x": 1250, "y": 750 },
-    { "title": "Design and Analysis of Algorithms", "x": 400, "y": 750 },
-    { "title": "Software construction", "x": 850, "y": 750 },
-    { "title": "Computer Systems Engineering", "x": 1250, "y": 950 }
+    { "id": 0, "title": "Calculus I", "x": 850, "y": 200 },
+    { "id": 1, "title": "Physics I", "x": 1250, "y": 400 },
+    { "id": 2, "title": "Calculus II", "x": 1550, "y": 400 },
+    { "id": 2, "title": "Physics II", "x": 1550, "y": 600 },
+    { "id": 4, "title": "MORE MATH", "x": 1850, "y": 600 },
+    { "id": 5, "title": "Discrete Math", "x": 400, "y": 400 },
+    { "id": 6, "title": "Introduction To Programming", "x": 850, "y": 400 },
+    { "id": 7, "title": "Introduction To Algorithms", "x": 400, "y": 600 },
+    { "id": 8, "title": "Fundamentals Of Programming", "x": 850, "y": 600 },
+    { "id": 9, "title": "C / Assembly", "x": 1250, "y": 600 },
+    { "id": 10, "title": "Computation Structures", "x": 1250, "y": 750 },
+    { "id": 11, "title": "Design and Analysis of Algorithms", "x": 400, "y": 750 },
+    { "id": 12, "title": "Software construction", "x": 850, "y": 750 },
+    { "id": 13, "title": "Computer Systems Engineering", "x": 1250, "y": 950 }
   ],
   "paths": [
     ["n0", "n5"],
