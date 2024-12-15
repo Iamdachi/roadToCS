@@ -28,7 +28,7 @@ function draw(data, lectures) {
         .attr('rx', 20)
         .attr('ry', 20)
         .attr('id', (d, i) => "n" + i)
-        .on('click', function (event, d, i) {
+        .on('click', function (event, d, i, lectures) {
           d3.select('#sidebar')
             .classed('active', true) // Add the 'active' class to slide in
 
