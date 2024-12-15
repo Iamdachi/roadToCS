@@ -29,7 +29,7 @@ function draw(data, lectures) {
         .attr('ry', 20)
         .attr('id', (d, i) => "n" + i)
         .on('click', function (event, d, i) {
-          alert(lectures);
+          alert(JSON.stringify(lectures, null, 2));
           d3.select('#sidebar')
             .classed('active', true) // Add the 'active' class to slide in
 
