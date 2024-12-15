@@ -129,26 +129,22 @@ function drawPaths(paths) {
 initZoom();
 
 document.addEventListener("DOMContentLoaded", () => {
-    let lectures;
+  Promise.all([
+    fetch('/mit-lectures').then(response => response.json()),
+    fetch('/mit-roadmap').then(response => response.json())
+  ]).then(([lecturesResponse, roadmapResponse]) => {
+    const lectures = lecturesResponse;
+    const data = roadmapResponse.data;
+    const paths = roadmapResponse.paths;
 
-    fetch('/mit-lectures')
-    .then(response => response.json())
-    .then(responseData => {
-      lectures = responseData;
-      console.log("SHOW ME THE LECTURES");
-      console.log(lectures);
-    })
+    console.log("SHOW ME THE LECTURES");
+    console.log(lectures);
 
-    fetch('/mit-roadmap')
-    .then(response => response.json())
-    .then(responseData => {
-      const data = responseData.data;
-      const paths = responseData.paths;
-
-      draw(data, lectures);
-      drawPaths(paths);
-    })
-    .catch(error => console.error("Error fetching data:", error));
+    draw(data, lectures); // Now `lectures` is guaranteed to be available
+    drawPaths(paths);
+  }).catch(error => {
+    console.error("Error loading data:", error);
+  });
 });
 
 
