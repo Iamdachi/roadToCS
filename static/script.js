@@ -19,84 +19,95 @@ function draw(data, lectures) {
     .data(data)
     .join(
       enter => enter
-        .append("rect")
-        .attr('x', d => d.x)
-        .attr('y', d => d.y)
-        .attr('width', 250)
-        .attr('height', 80)
-        .attr('fill', 'rgb(123, 24, 40)')
-        .attr('rx', 20)
-        .attr('ry', 20)
-        .attr('id', (d, i) => "n" + i)
-        .on('click', function (event, d) {
-          d3.select('#sidebar')
-            .classed('active', true); // Add the 'active' class to slide in
-        
-          d3.select('#sidebar h2') // Select the <h2> inside the sidebar
-            .text(d.title); // Set its content to the title of the clicked rectangle
-
-          // WRITE LIST ITEMS WITH CHECKBOXES
-          const ul = d3.select('#sidebar ul');
-          ul.selectAll('li').remove(); // Clear previous list items
-
-          const lecture_items = lectures[d.id]; // Use `d.id` to fetch the relevant lectures
-          if (lecture_items) {
-            ul.selectAll('li')
-              .data(lecture_items)
-              .enter()
-              .append('li')
-              .each(function (lecture) {
-                const li = d3.select(this);
-
-                // Add checkbox
-                li.append('input')
-                  .attr('type', 'checkbox')
-                  .attr('class', 'lecture-checkbox')
-                  .on('change', function () {
-                    // Toggle logic for checkbox
-                    const isChecked = this.checked;
-                    console.log(`${lecture.title} is ${isChecked ? 'checked' : 'unchecked'}`);
-                  });
-
-                // Add lecture link
-                li.append('a')
-                  .attr('href', lecture.link)
-                  .attr('target', '_blank') // Open links in a new tab
-                  .text(lecture.title);
-              });
-          } else {
-            console.error(`No lectures found for id: ${d.id}`);
-          }
-        })
+        .append("g") // Group for each rectangle and progress bar
         .each(function (d, i) {
-          if (i > 0) { // Only draw triangles for rectangles with id > 0
-            d3.select(this.parentNode)
-              .append("polygon")
-              .attr("points", () => {
-                const x = d.x + 125;  // Center of the rect horizontally
-                const y = d.y;        // Top edge of the rect
-                return `${x - 15},${y - 20} ${x + 15},${y - 20} ${x},${y}`; // Adjusted to touch by lower vertex
-              })
-              .attr("fill", "white");
-          }
+          const group = d3.select(this);
 
-          // Add title inside the rectangle
-          d3.select(this.parentNode)
-            .append("text")
+          // Main rectangle
+          group.append("rect")
+            .attr('x', d.x)
+            .attr('y', d.y)
+            .attr('width', 250)
+            .attr('height', 80)
+            .attr('fill', 'rgb(123, 24, 40)')
+            .attr('rx', 20)
+            .attr('ry', 20);
+
+          // Progress bar background
+          group.append("rect")
+            .attr('x', d.x + 10)
+            .attr('y', d.y + 60)
+            .attr('width', 230)
+            .attr('height', 10)
+            .attr('fill', 'white')
+            .attr('rx', 5)
+            .attr('ry', 5);
+
+          // Progress bar (green)
+          group.append("rect")
+            .attr('x', d.x + 10)
+            .attr('y', d.y + 60)
+            .attr('width', 0) // Initially empty
+            .attr('height', 10)
+            .attr('fill', 'green')
+            .attr('rx', 5)
+            .attr('ry', 5)
+            .attr('class', `progress-bar-${i}`); // Unique class for easy selection
+
+          // Title inside rectangle
+          group.append("text")
             .attr("x", d.x + 125) // Center horizontally
             .attr("y", d.y + 40)  // Center vertically
-            .attr("fill", "white") // White font color
-            .attr("text-anchor", "middle") // Center text
-            .style("font-family", "Roboto") // Apply the cute font
-            .style("font-weight", "bold") // Set font weight to bold
-            .text(d.title); // Set text from data.title
+            .attr("fill", "white")
+            .attr("text-anchor", "middle")
+            .style("font-family", "Roboto")
+            .style("font-weight", "bold")
+            .text(d.title);
+        })
+        .on('click', function (event, d) {
+          const lectureItems = lectures[d.id]; // Use `d.id` to fetch lectures
+          if (!lectureItems) return;
+
+          d3.select('#sidebar')
+            .classed('active', true);
+
+          d3.select('#sidebar h2')
+            .text(d.title);
+
+          const ul = d3.select('#sidebar ul');
+          ul.selectAll('li').remove();
+
+          ul.selectAll('li')
+            .data(lectureItems)
+            .enter()
+            .append('li')
+            .each(function (lecture) {
+              const li = d3.select(this);
+
+              li.append('input')
+                .attr('type', 'checkbox')
+                .attr('class', 'lecture-checkbox')
+                .on('change', function () {
+                  const checkboxes = ul.selectAll('.lecture-checkbox');
+                  const checkedCount = checkboxes.filter(':checked').size();
+                  const totalLectures = checkboxes.size();
+                  const progress = (checkedCount / totalLectures) * 230; // Scale to bar width
+
+                  d3.select(`.progress-bar-${d.id}`)
+                    .attr('width', progress);
+                });
+
+              li.append('a')
+                .attr('href', lecture.link)
+                .attr('target', '_blank')
+                .text(lecture.title);
+            });
         })
     );
-    // Close sidebar when "esc" button is clicked
-    d3.select('#close-btn').on('click', function() {
-      d3.select('#sidebar')
-        .classed('active', false); // Remove 'active' class to slide out
-    });
+
+  d3.select('#close-btn').on('click', function () {
+    d3.select('#sidebar').classed('active', false);
+  });
 }
 
 

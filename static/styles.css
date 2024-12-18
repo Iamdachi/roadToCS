@@ -46,3 +46,13 @@ body {
   flex-grow: 1; /* Takes remaining space for content */
   padding: 10px;
 }
+
+#sidebar ul {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+}
+
+#sidebar ul li {
+  margin-bottom: 10px; /* Optional: Add space between items */
+}
