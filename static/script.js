@@ -55,6 +55,14 @@ function draw(data, lectures) {
                   .on('change', function () {
                     // Toggle logic for checkbox
                     const isChecked = this.checked;
+                    //CHECKBOX CLICKED
+                      const checkboxes = ul.selectAll('.lecture-checkbox');
+                      const checkedCount = checkboxes.filter(':checked').size();
+                      const totalLectures = checkboxes.size();
+                      const progress = (checkedCount / totalLectures) * 230; // Scale to bar width
+
+                      d3.select(`.progress-bar-${d.id}`)
+                        .attr('width', progress);
                   });
 
                 // Add lecture link
@@ -88,7 +96,26 @@ function draw(data, lectures) {
             .attr("text-anchor", "middle") // Center text
             .style("font-family", "Roboto") // Apply the cute font
             .style("font-weight", "bold") // Set font weight to bold
-            .text(d.title); // Set text from data.title
+            .text(d.title) // Set text from data.title
+
+            .append("rect")
+            .attr('x', d.x + 10)
+            .attr('y', d.y + 60)
+            .attr('width', 230)
+            .attr('height', 10)
+            .attr('fill', 'white')
+            .attr('rx', 5)
+            .attr('ry', 5)
+
+            .append("rect")
+            .attr('x', d.x + 10)
+            .attr('y', d.y + 60)
+            .attr('width', 0) // Initially empty
+            .attr('height', 10)
+            .attr('fill', 'green')
+            .attr('rx', 5)
+            .attr('ry', 5)
+            .attr('class', `progress-bar-${i}`); // Unique class for easy selection
         })
     );
     // Close sidebar when "esc" button is clicked
