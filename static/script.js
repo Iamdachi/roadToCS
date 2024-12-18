@@ -55,7 +55,6 @@ function draw(data, lectures) {
                   .on('change', function () {
                     // Toggle logic for checkbox
                     const isChecked = this.checked;
-                    console.log(${lecture.title} is ${isChecked ? 'checked' : 'unchecked'});
                   });
 
                 // Add lecture link
