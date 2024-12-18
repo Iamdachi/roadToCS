@@ -29,6 +29,7 @@ function draw(data, lectures) {
             .attr('y', d.y)
             .attr('width', 250)
             .attr('height', 80)
+            .attr('id', (d, i) => "n" + i)
             .attr('fill', 'rgb(123, 24, 40)')
             .attr('rx', 20)
             .attr('ry', 20);
@@ -110,42 +111,44 @@ function draw(data, lectures) {
   });
 }
 
-
-
-
 function drawPaths(paths) {
+  // Calculate bezier curve for each path
   const coordinates = [];
   paths.forEach(path => {
     // Start x y
-    let rect1 = d3.select(`#n${path[0]}`).node().parentNode; // Select parent group of the first rectangle
-    let rect2 = d3.select(`#n${path[1]}`).node().parentNode; // Select parent group of the second rectangle
-
-    if (!rect1 || !rect2) {
-      console.warn(`Could not find elements for path:`, path);
-      return;
-    }
-
-    let x = +d3.select(rect1).select('rect').attr('x');
-    let widthOne = +d3.select(rect1).select('rect').attr('width');
-    let y = +d3.select(rect1).select('rect').attr('y');
-    const height1 = +d3.select(rect1).select('rect').attr('height');
-    x = x + widthOne / 2;
-    y = y + height1;
+    let x = d3.select(#${path[0]}).attr('x');
+    console.log(x);
+    let widthOne = d3.select(#${path[0]}).attr('width');
+    console.log(widthOne);
+    let y = d3.select(#${path[0]}).attr('y');
+    const height1 = d3.select(#${path[0]}).attr('height');
+    x = parseInt(x) + parseInt(widthOne) / 2;
+    y = parseInt(y) + parseInt(height1);
 
     // End x y
-    let ex = +d3.select(rect2).select('rect').attr('x');
-    let ey = +d3.select(rect2).select('rect').attr('y');
-    let width2 = +d3.select(rect2).select('rect').attr('width');
-    ex = ex + width2 / 2;
+    let ex = d3.select(#${path[1]}).attr('x'); // Use escape for a single digit
+    let ey = d3.select(#${path[1]}).attr('y');
+    let width2 = d3.select(#${path[0]}).attr('width');
+    ex = parseInt(ex) + parseInt(width2) / 2;
 
     // Check if any coordinate is null
     if (x !== null && y !== null && ex !== null && ey !== null) {
-      const pathString = `M ${x} ${y} C ${x} ${y + 50}, ${ex} ${ey - 60}, ${ex} ${ey - 20}`;
+      const pathString = M ${x} ${y} C ${x} ${y+50}, ${ex} ${ey-60}, ${ex} ${ey-20};
       coordinates.push(pathString);
     } else {
       console.warn("Could not find coordinates for path:", path);
     }
   });
+
+  d3.select('svg g')
+    .selectAll('path')
+    .data(coordinates)
+    .join('path')
+    .attr('d', function(d) { return d; }) // Set the 'd' attribute for the path
+    .attr('fill', 'none') // No fill for the curve
+    .attr('stroke', 'white') // Stroke color
+    .attr('stroke-width', 2); // Stroke width
+}
 
   d3.select('svg g')
     .selectAll('path')
