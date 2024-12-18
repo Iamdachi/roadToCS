@@ -64,7 +64,7 @@ function draw(data, lectures) {
                   .text(lecture.title);
               });
           } else {
-            console.error(No lectures found for id: ${d.id});
+            console.error("No lectures found for id: ${d.id})";
           }
         })
         .each(function (d, i) {
@@ -74,7 +74,7 @@ function draw(data, lectures) {
               .attr("points", () => {
                 const x = d.x + 125;  // Center of the rect horizontally
                 const y = d.y;        // Top edge of the rect
-                return ${x - 15},${y - 20} ${x + 15},${y - 20} ${x},${y}; // Adjusted to touch by lower vertex
+                return `${x - 15},${y - 20} ${x + 15},${y - 20} ${x},${y}`; // Adjusted to touch by lower vertex
               })
               .attr("fill", "white");
           }
@@ -103,24 +103,25 @@ function drawPaths(paths) {
   const coordinates = [];
   paths.forEach(path => {
     // Start x y
-    let x = d3.select(#${path[0]}).attr('x');
-    console.log(x);
-    let widthOne = d3.select(#${path[0]}).attr('width');
-    console.log(widthOne);
-    let y = d3.select(#${path[0]}).attr('y');
-    const height1 = d3.select(#${path[0]}).attr('height');
-    x = parseInt(x) + parseInt(widthOne) / 2;
-    y = parseInt(y) + parseInt(height1);
+        let x = d3.select(`#${path[0]}`).attr('x');
+        console.log(x);
+        let widthOne = d3.select(`#${path[0]}`).attr('width');
+        console.log(widthOne);
+        let y = d3.select(`#${path[0]}`).attr('y');
+        const height1 = d3.select(`#${path[0]}`).attr('height');
+        x = parseInt(x) + parseInt(widthOne) / 2;
+        y = parseInt(y) + parseInt(height1);
 
-    // End x y
-    let ex = d3.select(#${path[1]}).attr('x'); // Use escape for a single digit
-    let ey = d3.select(#${path[1]}).attr('y');
-    let width2 = d3.select(#${path[0]}).attr('width');
-    ex = parseInt(ex) + parseInt(width2) / 2;
+        // End x y
+        let ex = d3.select(`#${path[1]}`).attr('x'); // Use escape for a single digit
+        let ey = d3.select(`#${path[1]}`).attr('y');
+        let width2 = d3.select(`#${path[0]}`).attr('width');
+        ex = parseInt(ex) + parseInt(width2) / 2;
+
 
     // Check if any coordinate is null
     if (x !== null && y !== null && ex !== null && ey !== null) {
-      const pathString = M ${x} ${y} C ${x} ${y+50}, ${ex} ${ey-60}, ${ex} ${ey-20};
+      const pathString = `M ${x} ${y} C ${x} ${y+50}, ${ex} ${ey-60}, ${ex} ${ey-20}`;
       coordinates.push(pathString);
     } else {
       console.warn("Could not find coordinates for path:", path);
