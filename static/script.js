@@ -30,26 +30,43 @@ function draw(data, lectures) {
         .attr('id', (d, i) => "n" + i)
         .on('click', function (event, d) {
           d3.select('#sidebar')
-            .classed('active', true) // Add the 'active' class to slide in
-
+            .classed('active', true); // Add the 'active' class to slide in
+        
           d3.select('#sidebar h2') // Select the <h2> inside the sidebar
             .text(d.title); // Set its content to the title of the clicked rectangle
 
-          // WRITE LIST ITEMS
-          // Fill the existing <ul> with <li> elements
+          // WRITE LIST ITEMS WITH CHECKBOXES
           const ul = d3.select('#sidebar ul');
           ul.selectAll('li').remove(); // Clear previous list items
-          const lecture_items = lectures[d.id];
-          console.log("LOOK HERE!!!");
 
-          ul.selectAll('li')
-          .data(lecture_items)
-          .enter()
-          .append('li')
-          .append('a')
-          .attr('href', d => d.link)
-          .attr('target', '_blank') // Open links in a new tab
-          .text(d => d.title);
+          const lecture_items = lectures[d.id]; // Use `d.id` to fetch the relevant lectures
+          if (lecture_items) {
+            ul.selectAll('li')
+              .data(lecture_items)
+              .enter()
+              .append('li')
+              .each(function (lecture) {
+                const li = d3.select(this);
+
+                // Add checkbox
+                li.append('input')
+                  .attr('type', 'checkbox')
+                  .attr('class', 'lecture-checkbox')
+                  .on('change', function () {
+                    // Toggle logic for checkbox
+                    const isChecked = this.checked;
+                    console.log(`${lecture.title} is ${isChecked ? 'checked' : 'unchecked'}`);
+                  });
+
+                // Add lecture link
+                li.append('a')
+                  .attr('href', lecture.link)
+                  .attr('target', '_blank') // Open links in a new tab
+                  .text(lecture.title);
+              });
+          } else {
+            console.error(`No lectures found for id: ${d.id}`);
+          }
         })
         .each(function (d, i) {
           if (i > 0) { // Only draw triangles for rectangles with id > 0
