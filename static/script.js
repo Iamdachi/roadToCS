@@ -20,6 +20,7 @@ function draw(data, lectures) {
     .join(
       enter => enter
         .append("g") // Group for each rectangle and progress bar
+        .attr('id', (d, i) => "n" + i)
         .each(function (d, i) {
           const group = d3.select(this);
 
@@ -29,7 +30,6 @@ function draw(data, lectures) {
             .attr('y', d.y)
             .attr('width', 250)
             .attr('height', 80)
-            .attr('id', (d, i) => "n" + i)
             .attr('fill', 'rgb(123, 24, 40)')
             .attr('rx', 20)
             .attr('ry', 20);
@@ -115,8 +115,8 @@ function drawPaths(paths) {
   const coordinates = [];
   paths.forEach(path => {
     // Start x y
-    let rect1 = d3.select(`#n${path[0]}`).node().parentNode; // Select parent group of the first rectangle
-    let rect2 = d3.select(`#n${path[1]}`).node().parentNode; // Select parent group of the second rectangle
+    let rect1 = d3.select(`#n${path[0]}`).node(); // Select parent group of the first rectangle
+    let rect2 = d3.select(`#n${path[1]}`).node(); // Select parent group of the second rectangle
 
     if (!rect1 || !rect2) {
       console.warn(`Could not find elements for path:`, path);
