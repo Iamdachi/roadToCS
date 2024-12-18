@@ -64,7 +64,7 @@ function draw(data, lectures) {
                   .text(lecture.title);
               });
           } else {
-            console.error("No lectures found for id: ${d.id})";
+            console.error(`No lectures found for id: ${d.id}`);
           }
         })
         .each(function (d, i) {
