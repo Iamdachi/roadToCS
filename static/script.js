@@ -12,118 +12,114 @@ function handleZoom(e) {
 	d3.select('svg g')
 		.attr('transform', e.transform);
 }
-
 function draw(data, lectures) {
-  d3.select('svg g')
+  const svgGroup = d3.select('svg g');
+  svgGroup
     .selectAll('rect')
     .data(data)
     .join(
       enter => enter
-        .append("rect")
-        .attr('x', d => d.x)
-        .attr('y', d => d.y)
-        .attr('width', 250)
-        .attr('height', 80)
-        .attr('fill', 'rgb(123, 24, 40)')
-        .attr('rx', 20)
-        .attr('ry', 20)
-        .attr('id', (d, i) => "n" + i)
-        .on('click', function (event, d) {
-          d3.select('#sidebar')
-            .classed('active', true); // Add the 'active' class to slide in
+        .append("g") // Append group to contain each element
+        .each(function(d, i) {
+          const group = d3.select(this);
 
-          d3.select('#sidebar h2') // Select the <h2> inside the sidebar
-            .text(d.title); // Set its content to the title of the clicked rectangle
+          // Main rectangle
+          group.append("rect")
+            .attr('x', d.x)
+            .attr('y', d.y)
+            .attr('width', 250)
+            .attr('height', 80)
+            .attr('fill', 'rgb(123, 24, 40)')
+            .attr('rx', 20)
+            .attr('ry', 20)
+            .attr('id', `n${i}`)
+            .on('click', function(event, d) {
+              d3.select('#sidebar')
+                .classed('active', true);
 
-          // WRITE LIST ITEMS WITH CHECKBOXES
-          const ul = d3.select('#sidebar ul');
-          ul.selectAll('li').remove(); // Clear previous list items
+              d3.select('#sidebar h2').text(d.title);
 
-          const lecture_items = lectures[d.id]; // Use d.id to fetch the relevant lectures
-          if (lecture_items) {
-            ul.selectAll('li')
-              .data(lecture_items)
-              .enter()
-              .append('li')
-              .each(function (lecture) {
-                const li = d3.select(this);
+              const ul = d3.select('#sidebar ul');
+              ul.selectAll('li').remove();
 
-                // Add checkbox
-                li.append('input')
-                  .attr('type', 'checkbox')
-                  .attr('class', 'lecture-checkbox')
-                  .on('change', function () {
-                    // Toggle logic for checkbox
-                    const isChecked = this.checked;
-                    //CHECKBOX CLICKED
-                      const checkboxes = ul.selectAll('.lecture-checkbox');
-                      const checkedCount = checkboxes.filter(':checked').size();
-                      const totalLectures = checkboxes.size();
-                      const progress = (checkedCount / totalLectures) * 230; // Scale to bar width
+              const lectureItems = lectures[d.id];
+              if (lectureItems) {
+                ul.selectAll('li')
+                  .data(lectureItems)
+                  .enter()
+                  .append('li')
+                  .each(function(lecture) {
+                    const li = d3.select(this);
 
-                      d3.select(`.progress-bar-${d.id}`)
-                        .attr('width', progress);
+                    li.append('input')
+                      .attr('type', 'checkbox')
+                      .attr('class', 'lecture-checkbox')
+                      .on('change', function() {
+                        const checkboxes = ul.selectAll('.lecture-checkbox');
+                        const checkedCount = checkboxes.filter(':checked').size();
+                        const totalLectures = checkboxes.size();
+                        const progress = (checkedCount / totalLectures) * 230;
+
+                        d3.select(`.progress-bar-${d.id}`)
+                          .attr('width', progress);
+                      });
+
+                    li.append('a')
+                      .attr('href', lecture.link)
+                      .attr('target', '_blank')
+                      .text(lecture.title);
                   });
+              } else {
+                console.error(`No lectures found for id: ${d.id}`);
+              }
+            });
 
-                // Add lecture link
-                li.append('a')
-                  .attr('href', lecture.link)
-                  .attr('target', '_blank') // Open links in a new tab
-                  .text(lecture.title);
-              });
-          } else {
-            console.error(`No lectures found for id: ${d.id}`);
-          }
-        })
-        .each(function (d, i) {
-          if (i > 0) { // Only draw triangles for rectangles with id > 0
-            d3.select(this.parentNode)
-              .append("polygon")
-              .attr("points", () => {
-                const x = d.x + 125;  // Center of the rect horizontally
-                const y = d.y;        // Top edge of the rect
-                return `${x - 15},${y - 20} ${x + 15},${y - 20} ${x},${y}`; // Adjusted to touch by lower vertex
-              })
+          // Title inside rectangle
+          group.append("text")
+            .attr("x", d.x + 125)
+            .attr("y", d.y + 40)
+            .attr("fill", "white")
+            .attr("text-anchor", "middle")
+            .style("font-family", "Roboto")
+            .style("font-weight", "bold")
+            .text(d.title);
+
+          // Draw triangle (for id > 0)
+          if (i > 0) {
+            group.append("polygon")
+              .attr("points", `${d.x + 125 - 15},${d.y - 20} ${d.x + 125 + 15},${d.y - 20} ${d.x + 125},${d.y}`)
               .attr("fill", "white");
           }
 
-          // Add title inside the rectangle
-          d3.select(this.parentNode)
-            .append("text")
-            .attr("x", d.x + 125) // Center horizontally
-            .attr("y", d.y + 40)  // Center vertically
-            .attr("fill", "white") // White font color
-            .attr("text-anchor", "middle") // Center text
-            .style("font-family", "Roboto") // Apply the cute font
-            .style("font-weight", "bold") // Set font weight to bold
-            .text(d.title) // Set text from data.title
-
-            .append("rect")
+          // Progress bar (background and actual bar)
+          group.append("rect")
             .attr('x', d.x + 10)
             .attr('y', d.y + 60)
             .attr('width', 230)
             .attr('height', 10)
             .attr('fill', 'white')
             .attr('rx', 5)
-            .attr('ry', 5)
+            .attr('ry', 5);
 
-            .append("rect")
+          group.append("rect")
             .attr('x', d.x + 10)
             .attr('y', d.y + 60)
-            .attr('width', 0) // Initially empty
+            .attr('width', 0)
             .attr('height', 10)
             .attr('fill', 'green')
             .attr('rx', 5)
             .attr('ry', 5)
-            .attr('class', `progress-bar-${i}`); // Unique class for easy selection
+            .attr('class', `progress-bar-${i}`);
         })
     );
-    // Close sidebar when "esc" button is clicked
-    d3.select('#close-btn').on('click', function() {
-      d3.select('#sidebar')
-        .classed('active', false); // Remove 'active' class to slide out
-    });
+
+  // Close sidebar when "esc" button is clicked
+  d3.select('#close-btn').on('click', function() {
+    d3.select('#sidebar')
+      .classed('active', false);
+  });
 }
+
 
 function drawPaths(paths) {
   // Calculate bezier curve for each path
