@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(lectures);
 
     draw(data, lectures); // Now `lectures` is guaranteed to be available
-    drawPaths(paths);
+    setTimeout(() => drawPaths(paths), 0); // Ensure paths are drawn after rects
   }).catch(error => {
     console.error("Error loading data:", error);
   });
