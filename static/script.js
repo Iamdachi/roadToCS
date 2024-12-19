@@ -12,6 +12,7 @@ function handleZoom(e) {
 	d3.select('svg g')
 		.attr('transform', e.transform);
 }
+
 function draw(data, lectures) {
   const svgGroup = d3.select('svg g');
   svgGroup
@@ -54,6 +55,7 @@ function draw(data, lectures) {
                     li.append('input')
                       .attr('type', 'checkbox')
                       .attr('class', 'lecture-checkbox')
+                      .property('checked', lecture.done)
                       .on('change', function() {
                         const checkboxes = ul.selectAll('.lecture-checkbox');
                         const checkedCount = checkboxes.filter(':checked').size();
