@@ -71,6 +71,16 @@ function draw(data, lectures) {
                       .attr('target', '_blank')
                       .text(lecture.title);
                   });
+                  // After appending all checkboxes and setting their 'checked' property
+                  const checkboxes = ul.selectAll('.lecture-checkbox');
+                  const checkedCount = checkboxes.filter(function() {
+                    return d3.select(this).property('checked');
+                  }).size();
+                  const totalLectures = checkboxes.size();
+                  const progress = (checkedCount / totalLectures) * 230;
+
+                d3.select(`.progress-bar-${d.id}`)
+                  .attr('width', progress);
               } else {
                 console.error(`No lectures found for id: ${d.id}`);
               }
@@ -113,18 +123,7 @@ function draw(data, lectures) {
             .attr('ry', 5)
             .attr('class', `progress-bar-${i}`);
 
-            // After appending all checkboxes and setting their 'checked' property
-            const checkboxes = ul.selectAll('.lecture-checkbox');
-            const checkedCount = checkboxes.filter(function() {
-              return d3.select(this).property('checked');
-            }).size();
-            const totalLectures = checkboxes.size();
-            const progress = (checkedCount / totalLectures) * 230;
-
-            d3.select(`.progress-bar-${d.id}`)
-              .attr('width', progress);
-
-        })
+          })
     );
 
   // Close sidebar when "esc" button is clicked
