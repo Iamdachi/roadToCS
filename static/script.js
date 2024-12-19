@@ -113,19 +113,19 @@ function draw(data, lectures) {
             .attr('ry', 5)
             .attr('class', `progress-bar-${i}`);
 
+
             // After appending all checkboxes and setting their 'checked' property
-            const ul = d3.select('#sidebar ul');
-            const checkboxes = ul.selectAll('.lecture-checkbox');
-            const checkedCount = checkboxes.filter(function() {
-              return d3.select(this).property('checked');
-            }).size();
-            const totalLectures = checkboxes.size();
+            let checkedCount = 0;
+            lectures[d.id].forEach(entry => {
+              if (entry["done"]) checkedCount++;
+            });
+
+            const totalLectures = lectures[d.id].length;
             const progress = (checkedCount / totalLectures) * 230;
 
-            d3.select(`.progress-bar-${d.id}`)
-              .attr('width', progress);
-
-          })
+          d3.select(`.progress-bar-${i}`)
+            .attr('width', progress);
+        })
     );
 
   // Close sidebar when "esc" button is clicked
@@ -142,9 +142,7 @@ function drawPaths(paths) {
   paths.forEach(path => {
     // Start x y
         let x = d3.select(`#${path[0]}`).attr('x');
-        console.log(x);
         let widthOne = d3.select(`#${path[0]}`).attr('width');
-        console.log(widthOne);
         let y = d3.select(`#${path[0]}`).attr('y');
         const height1 = d3.select(`#${path[0]}`).attr('height');
         x = parseInt(x) + parseInt(widthOne) / 2;
@@ -186,9 +184,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const lectures = lecturesResponse;
     const data = roadmapResponse.data;
     const paths = roadmapResponse.paths;
-
-    console.log("SHOW ME THE LECTURES");
-    console.log(lectures);
 
     draw(data, lectures); // Now `lectures` is guaranteed to be available
     setTimeout(() => drawPaths(paths), 0); // Ensure paths are drawn after rects
