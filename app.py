@@ -38,7 +38,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(64), nullable=True)
-    courses = db.relationship('Lecture', secondary=user_lectures, backref='students')
+    lectures = db.relationship('Lecture', secondary=user_lectures, backref='students')
 
 
 class Lecture(db.Model):
