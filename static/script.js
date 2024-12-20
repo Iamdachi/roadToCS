@@ -79,7 +79,7 @@ function draw(data, lectures) {
                     li.append('input')
                       .attr('type', 'checkbox')
                       .attr('class', 'lecture-checkbox')
-                      .attr('id', `L${d.id}-${lecture.id}`) // Set unique id
+                      .attr('id', `L${d.id}_${lecture.id}`) // Set unique id
                       .property('checked', lecture.done)
                       .on('change', function() {
                         const checkboxes = ul.selectAll('.lecture-checkbox');
