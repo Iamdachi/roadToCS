@@ -51,10 +51,10 @@ function draw(data, lectures) {
                   .append('li')
                   .each(function(lecture) {
                     const li = d3.select(this);
-
                     li.append('input')
                       .attr('type', 'checkbox')
                       .attr('class', 'lecture-checkbox')
+                      .attr('id', d => `${d.id}-${lecture[id]}`) // Set unique id
                       .property('checked', lecture.done)
                       .on('change', function() {
                         const checkboxes = ul.selectAll('.lecture-checkbox');

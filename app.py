@@ -27,10 +27,10 @@ oauth_flow = google_auth_oauthlib.flow.Flow.from_client_config(
 )
 
 # Association table for the many-to-many relationship
-user_courses = db.Table(
-    'user_courses',
+user_lectures = db.Table(
+    'user_lectures',
     db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('course_id', db.Integer, db.ForeignKey('courses.id'), primary_key=True)
+    db.Column('lecture_id', db.Integer, db.ForeignKey('lectures.id'), primary_key=True)
 )
 
 class User(UserMixin, db.Model):
@@ -38,11 +38,11 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(64), nullable=True)
-    courses = db.relationship('Course', secondary=user_courses, backref='students')
+    courses = db.relationship('Lecture', secondary=user_lectures, backref='students')
 
 
-class Course(db.Model):
-    __tablename__ = 'courses'
+class Lecture(db.Model):
+    __tablename__ = 'lectures'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)
 
