@@ -65,7 +65,6 @@ def populate_lectures(db):
     db.session.commit()
     print("POPULATED LCTURES")
 
-populate_lectures(db)
 ## usage
 '''
 user = User.query.get(1)  # Fetch user with ID 1
@@ -205,3 +204,4 @@ def get_lectures_data():
 with app.app_context():
     db.drop_all()  # Drops all tables DELETE THIS LINE LATER!!!
     db.create_all()  # Creates tables again
+    populate_lectures(db)
