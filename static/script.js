@@ -15,6 +15,7 @@ function handleZoom(e) {
 
 function handleCheckboxClick(checkbox) {
   const lectureId = checkbox.getAttribute('id');
+  console.log(lectureId);
   const isChecked = checkbox.checked;
 
   fetch('/update-lecture-status', {
@@ -90,8 +91,8 @@ function draw(data, lectures) {
                           .attr('width', progress);
 
                         // send request
-                        handleCheckboxClick(this);
 
+                        handleCheckboxClick(this);
                       });
 
                     li.append('a')
