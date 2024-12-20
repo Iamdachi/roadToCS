@@ -46,7 +46,25 @@ class Lecture(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)
 
+def populate_lectures():
+    with open('lectures.json') as f:
+        data = json.load(f)
 
+    # Populate DB
+    for course_id in data:
+        lectures = data[course_id]
+
+        for lecture in lectures:
+            lecture_id = lecture['id']
+            name = f"L{course_id}_{lecture_id}"
+            print(name)
+
+            lecture_entry = Lecture(name=name)
+            db.session.add(lecture_entry)
+
+    db.session.commit()
+
+populate_lectures()
 ## usage
 '''
 user = User.query.get(1)  # Fetch user with ID 1
@@ -180,6 +198,8 @@ def get_lectures_data():
     with open('lectures.json') as f:
         lectures = json.load(f)
     return jsonify(lectures)
+
+
 
 with app.app_context():
     db.drop_all()  # Drops all tables DELETE THIS LINE LATER!!!

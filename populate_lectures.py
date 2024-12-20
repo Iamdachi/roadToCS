@@ -8,17 +8,15 @@ with open('lectures.json') as f:
     data = json.load(f)
 
 # Populate DB
-for course in data['courses']:
-    print(course)
-    '''
-    for lecture in course['lectures']:
-        lecture_id = lecture['id']
-        name = lecture['name']
-        lecture_entry = Lecture(
-            id=int(f"{course_id}{lecture_id}"),
-            name=name
-        )
-    '''
-        #db.session.add(lecture_entry)
+for course_id in data:
+    lectures = data[course_id]
 
-#db.session.commit()
+    for lecture in lectures:
+        lecture_id = lecture['id']
+        name = f"L{course_id}_{lecture_id}"
+        print(name)
+
+        lecture_entry = Lecture(name=name)
+        db.session.add(lecture_entry)
+
+db.session.commit()
