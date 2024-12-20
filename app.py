@@ -201,9 +201,8 @@ def get_lectures_data():
 
     with open('lectures.json') as f:
         lectures = json.load(f)
-        if "access_token" in session:
+        if current_user.is_authenticated:
             done_lectures = Lecture.query.join(user_lectures).join(User).filter(User.id == current_user.id).all()
-
             for done_lecture in done_lectures:
                 name = done_lecture.name
                 cId = name.split('_')[0][1:]
