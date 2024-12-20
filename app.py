@@ -46,7 +46,7 @@ class Lecture(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)
 
-def populate_lectures():
+def populate_lectures(db):
     with open('lectures.json') as f:
         data = json.load(f)
 
@@ -65,7 +65,7 @@ def populate_lectures():
     db.session.commit()
     print("POPULATED LCTURES")
 
-populate_lectures()
+populate_lectures(db)
 ## usage
 '''
 user = User.query.get(1)  # Fetch user with ID 1
