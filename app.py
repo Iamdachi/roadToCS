@@ -208,7 +208,7 @@ def get_lectures_data():
                 cId = name.split('_')[0][1:]
                 lId = name.split('_')[1]
 
-                lectures[str(cId)][lId]["done"] = True
+                lectures[str(cId)][int(lId)]["done"] = True
 
     return jsonify(lectures)
 
