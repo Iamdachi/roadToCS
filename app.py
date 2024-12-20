@@ -198,8 +198,19 @@ def get_roadmap_data():
 
 @app.route('/mit-lectures')
 def get_lectures_data():
+
     with open('lectures.json') as f:
         lectures = json.load(f)
+        if "access_token" in session:
+            done_lectures = Lecture.query.join(user_lectures).join(User).filter(User.id == current_user.id).all()
+
+            for done_lecture in done_lectures:
+                name = done_lecture.name
+                cId = name.split('_')[0][1:]
+                lId = name.split('_')[1]
+
+                lectures[str(cId)][lId]["done"] = True
+
     return jsonify(lectures)
 
 
