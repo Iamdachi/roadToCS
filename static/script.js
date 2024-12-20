@@ -64,6 +64,9 @@ function draw(data, lectures) {
 
                         d3.select(`.progress-bar-${d.id}`)
                           .attr('width', progress);
+
+                        // send request
+
                       });
 
                     li.append('a')

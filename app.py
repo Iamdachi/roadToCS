@@ -2,7 +2,7 @@ from flask import Flask, jsonify, redirect, session, flash, url_for, request, re
 import google_auth_oauthlib.flow
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user,\
-    current_user
+    current_user, login_required
 import json
 import os
 import requests
@@ -61,6 +61,34 @@ course = Course.query.get(2)
 print([student.username for student in course.students])
 
 '''
+
+@app.route('/update-lecture-status', methods=['POST'])
+@login_required
+def update_lecture_status():
+    data = request.get_json()
+    lecture_id = data.get('lecture_id')
+    done = data.get('done')
+
+    if not lecture_id:
+        return jsonify({'error': 'Invalid data'}), 400
+
+    # Fetch the lecture by ID
+    lecture = Lecture.query.get(lecture_id)
+    if not lecture:
+        return jsonify({'error': 'Lecture not found'}), 404
+
+    if done:
+        # Add the lecture to the user's list if it's marked as done
+        if lecture not in current_user.lectures:
+            current_user.lectures.append(lecture)
+    else:
+        # Remove the lecture from the user's list if it's marked as not done
+        if lecture in current_user.lectures:
+            current_user.lectures.remove(lecture)
+
+    db.session.commit()
+    return jsonify({'success': True}), 200
+
 @login.user_loader
 def load_user(id):
     return db.session.get(User, int(id))
