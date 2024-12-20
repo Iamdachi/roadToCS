@@ -63,6 +63,7 @@ def populate_lectures():
             db.session.add(lecture_entry)
 
     db.session.commit()
+    print("POPULATED LCTURES")
 
 populate_lectures()
 ## usage
