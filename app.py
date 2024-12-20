@@ -93,7 +93,7 @@ def update_lecture_status():
     # Fetch the lecture by ID
     lecture = Lecture.query.filter_by(name=lecture_id).first()
     if not lecture:
-        return jsonify({'error': 'Lecture not found'}), 404
+        return jsonify({'error': 'Lecture not found ' + lecture_id}), 404
 
     if done:
         # Add the lecture to the user's list if it's marked as done
