@@ -13,6 +13,30 @@ function handleZoom(e) {
 		.attr('transform', e.transform);
 }
 
+function handleCheckboxClick(checkbox) {
+  const lectureId = checkbox.getAttribute('id');
+  const isChecked = checkbox.checked;
+
+  fetch('/update-lecture-status', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      lecture_id: lectureId,
+      done: isChecked,
+    }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+
 function draw(data, lectures) {
   const svgGroup = d3.select('svg g');
   svgGroup
@@ -66,6 +90,7 @@ function draw(data, lectures) {
                           .attr('width', progress);
 
                         // send request
+                        handleCheckboxClick(this);
 
                       });
 
