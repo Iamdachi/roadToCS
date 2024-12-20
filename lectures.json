@@ -1,8 +1,8 @@
 {
   "0": [
-    { "id" : 0, "title": "0Lecture 1", "link": "https://youtube.com", "done" : true },
-    { "id" : 1, "title": "Lecture 2", "link": "https://youtube.com", "done" : true },
-    { "id" : 2, "title": "Lecture 3", "link": "https://youtube.com", "done" : true },
+    { "id" : 0, "title": "0Lecture 1", "link": "https://youtube.com", "done" : false },
+    { "id" : 1, "title": "Lecture 2", "link": "https://youtube.com", "done" : false },
+    { "id" : 2, "title": "Lecture 3", "link": "https://youtube.com", "done" : false },
     { "id" : 3, "title": "Lecture 4", "link": "https://youtube.com", "done" : false },
     { "id" : 4, "title": "Lecture 5", "link": "https://youtube.com", "done" : false },
     { "id" : 5, "title": "Lecture 6", "link": "https://youtube.com", "done" : false },
@@ -10,9 +10,9 @@
     { "id" : 7, "title": "Lecture 8", "link": "https://youtube.com", "done" : false }
   ],
   "1": [
-    { "id" : 0, "title": "1Lecture 1", "link": "https://youtube.com", "done" : true },
-    { "id" : 1, "title": "Lecture 2", "link": "https://youtube.com", "done" : true },
-    { "id" : 2, "title": "Lecture 3", "link": "https://youtube.com", "done" : true },
+    { "id" : 0, "title": "1Lecture 1", "link": "https://youtube.com", "done" : false },
+    { "id" : 1, "title": "Lecture 2", "link": "https://youtube.com", "done" : false },
+    { "id" : 2, "title": "Lecture 3", "link": "https://youtube.com", "done" : false },
     { "id" : 3, "title": "Lecture 4", "link": "https://youtube.com", "done" : false },
     { "id" : 4, "title": "Lecture 5", "link": "https://youtube.com", "done" : false },
     { "id" : 5, "title": "Lecture 6", "link": "https://youtube.com", "done" : false },
@@ -20,7 +20,7 @@
     { "id" : 7, "title": "Lecture 8", "link": "https://youtube.com", "done" : false }
   ],
   "2": [
-    { "id" : 0, "title": "2Lecture 1", "link": "https://youtube.com", "done" : true },
+    { "id" : 0, "title": "2Lecture 1", "link": "https://youtube.com", "done" : false },
     { "id" : 1, "title": "Lecture 2", "link": "https://youtube.com", "done" : false },
     { "id" : 2, "title": "Lecture 3", "link": "https://youtube.com", "done" : false },
     { "id" : 3, "title": "Lecture 4", "link": "https://youtube.com", "done" : false },
@@ -30,8 +30,8 @@
     { "id" : 7, "title": "Lecture 8", "link": "https://youtube.com", "done" : false }
   ],
   "3": [
-    { "id" : 0, "title": "3Lecture 1", "link": "https://youtube.com", "done" : true },
-    { "id" : 1, "title": "Lecture 2", "link": "https://youtube.com", "done" : true },
+    { "id" : 0, "title": "3Lecture 1", "link": "https://youtube.com", "done" : false },
+    { "id" : 1, "title": "Lecture 2", "link": "https://youtube.com", "done" : false },
     { "id" : 2, "title": "Lecture 3", "link": "https://youtube.com", "done" : false },
     { "id" : 3, "title": "Lecture 4", "link": "https://youtube.com", "done" : false },
     { "id" : 4, "title": "Lecture 5", "link": "https://youtube.com", "done" : false },
@@ -40,8 +40,8 @@
     { "id" : 7, "title": "Lecture 8", "link": "https://youtube.com", "done" : false }
   ],
   "4": [
-    { "id" : 0, "title": "4Lecture 1", "link": "https://youtube.com", "done" : true },
-    { "id" : 1, "title": "Lecture 2", "link": "https://youtube.com", "done" : true },
+    { "id" : 0, "title": "4Lecture 1", "link": "https://youtube.com", "done" : false },
+    { "id" : 1, "title": "Lecture 2", "link": "https://youtube.com", "done" : false },
     { "id" : 2, "title": "Lecture 3", "link": "https://youtube.com", "done" : false },
     { "id" : 3, "title": "Lecture 4", "link": "https://youtube.com", "done" : false },
     { "id" : 4, "title": "Lecture 5", "link": "https://youtube.com", "done" : false },
@@ -50,8 +50,8 @@
     { "id" : 7, "title": "Lecture 8", "link": "https://youtube.com", "done" : false }
   ],
   "5": [
-    { "id" : 0, "title": "5Lecture 1", "link": "https://youtube.com", "done" : true },
-    { "id" : 1, "title": "Lecture 2", "link": "https://youtube.com", "done" : true },
+    { "id" : 0, "title": "5Lecture 1", "link": "https://youtube.com", "done" : false },
+    { "id" : 1, "title": "Lecture 2", "link": "https://youtube.com", "done" : false },
     { "id" : 2, "title": "Lecture 3", "link": "https://youtube.com", "done" : false },
     { "id" : 3, "title": "Lecture 4", "link": "https://youtube.com", "done" : false },
     { "id" : 4, "title": "Lecture 5", "link": "https://youtube.com", "done" : false },
