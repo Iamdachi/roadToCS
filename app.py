@@ -160,11 +160,14 @@ def welcome():
     if "access_token" in session:
         user_info = get_user_info(session["access_token"])
         if user_info:
+            '''
             return f"""
                 Hello {user_info}!<br>
                 Your email address is {user_info["email"]}<br>
                 <a href="/logout">Log out</a>
             """
+            '''
+            return render_template("index.html")
     return render_template("index.html")
 
 # Call the userinfo API to get the user's information with a valid access token.
