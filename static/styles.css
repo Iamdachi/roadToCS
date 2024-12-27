@@ -60,7 +60,7 @@ body {
 nav {
   display: flex;
   justify-content: space-around;
-  background-color: #f4f4f4;
+  background-color: rgb(123, 24, 40);
   padding: 10px;
 }
 nav ul {
