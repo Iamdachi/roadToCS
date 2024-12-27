@@ -1,4 +1,5 @@
 body {
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,6 +63,8 @@ nav {
   justify-content: space-around;
   background-color: rgb(123, 24, 40);
   padding: 10px;
+  top: 0;
+  left: 0;
   position: fixed; /* Fixes the navbar to the top */
   width: 100%; /* Makes the navbar span the full width of the screen */
   z-index: 1000; /* Ensures the navbar stays on top of other content */
@@ -78,4 +81,8 @@ nav li {
 nav a {
   text-decoration: none;
   color: black;
+}
+
+svg {
+  margin-top: 50px; /* Adjust to ensure SVG does not overlap with navbar */
 }
