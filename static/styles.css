@@ -62,6 +62,9 @@ nav {
   justify-content: space-around;
   background-color: rgb(123, 24, 40);
   padding: 10px;
+  position: fixed; /* Fixes the navbar to the top */
+  width: 100%; /* Makes the navbar span the full width of the screen */
+  z-index: 1000; /* Ensures the navbar stays on top of other content */
 }
 nav ul {
   list-style: none;
