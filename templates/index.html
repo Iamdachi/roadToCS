@@ -11,6 +11,15 @@
 <body>
     <nav>
         <h1>Website Under Construction...</h1>
+        <ul>
+            <li><a href="/">Roadmap</a></li>
+            <li><a href="/about-us">About Us</a></li>
+            {% if session["access_token"] %}
+                <li><a href="/logout">Sign Out</a></li>
+            {% else %}
+                <li><a href="/login">Sign In</a></li>
+            {% endif %}
+        </ul>
     </nav>
     <svg style="width: 100%; height: 100%;">
         <g></g>
