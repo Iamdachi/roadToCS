@@ -1,13 +1,13 @@
 {
   "0": [
-    { "id" : 0, "title": "0Lecture 1", "link": "https://youtube.com", "done" : false },
-    { "id" : 1, "title": "Lecture 2", "link": "https://youtube.com", "done" : false },
-    { "id" : 2, "title": "Lecture 3", "link": "https://youtube.com", "done" : false },
-    { "id" : 3, "title": "Lecture 4", "link": "https://youtube.com", "done" : false },
-    { "id" : 4, "title": "Lecture 5", "link": "https://youtube.com", "done" : false },
-    { "id" : 5, "title": "Lecture 6", "link": "https://youtube.com", "done" : false },
-    { "id" : 6, "title": "Lecture 7", "link": "https://youtube.com", "done" : false },
-    { "id" : 7, "title": "Lecture 8", "link": "https://youtube.com", "done" : false }
+    { "id" : 0, "title": "Derivatives, slope, velocity, rate of change", "link": "https://www.youtube.com/watch?v=7K1sB05pE0A&list=PL590CCC2BC5AF3BC1", "done" : false },
+    { "id" : 1, "title": "Limits, continuity; Trigonometric limits", "link": "https://www.youtube.com/watch?v=ryLdyDrBfvI&list=PL590CCC2BC5AF3BC1&index=2", "done" : false },
+    { "id" : 2, "title": "Derivatives of products, quotients, sine, cosine", "link": "https://www.youtube.com/watch?v=kCPVBl953eY&list=PL590CCC2BC5AF3BC1&index=3", "done" : false },
+    { "id" : 3, "title": "Chain rule, Higher derivatives", "link": "https://www.youtube.com/watch?v=4sTKcvYMNxk&list=PL590CCC2BC5AF3BC1&index=4", "done" : false },
+    { "id" : 4, "title": "Implicit differentiation, inverses", "link": "https://www.youtube.com/watch?v=5q_3FDOkVRQ&list=PL590CCC2BC5AF3BC1&index=5", "done" : false },
+    { "id" : 5, "title": "Exponential and log; Logarithmic differentiation; hyperbolic functions", "link": "https://www.youtube.com/watch?v=9v25gg2qJYE&list=PL590CCC2BC5AF3BC1&index=6", "done" : false },
+    { "id" : 6, "title": "Hyperbolic functions (cont.) and exam 1 review", "link": "https://www.youtube.com/watch?v=eHJuAByQf5A&list=PL590CCC2BC5AF3BC1&index=7", "done" : false },
+    { "id" : 7, "title": "Linear and quadratic approximations", "link": "https://www.youtube.com/watch?v=BSAA0akmPEU&list=PL590CCC2BC5AF3BC1&index=8", "done" : false }
   ],
   "1": [
     { "id" : 0, "title": "1Lecture 1", "link": "https://youtube.com", "done" : false },

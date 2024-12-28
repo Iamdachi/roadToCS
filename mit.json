@@ -1,6 +1,6 @@
 {
   "data": [
-    { "id": 0, "title": "Calculus I", "x": 850, "y": 200 },
+    { "id": 0, "title": "MIT 18.01 Single Variable Calculus", "x": 850, "y": 200 },
     { "id": 1, "title": "Physics I", "x": 1250, "y": 400 },
     { "id": 2, "title": "Calculus II", "x": 1550, "y": 400 },
     { "id": 2, "title": "Physics II", "x": 1550, "y": 600 },
