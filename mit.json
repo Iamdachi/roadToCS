@@ -1,6 +1,6 @@
 {
   "data": [
-    { "id": 0, "title": "Calculus", "x": 1500, "y": 300 },
+    { "id": 0, "title": "Calculus", "x": 1400, "y": 300 },
     { "id": 1, "title": "Linear Algebra", "x": 1700, "y": 500 },
     { "id": 2, "title": "Probability", "x": 1400, "y": 500 },
     { "id": 3, "title": "Physics", "x": 1100, "y": 500 },
