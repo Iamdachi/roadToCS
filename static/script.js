@@ -115,8 +115,8 @@ function draw(data, lectures) {
             .style("font-weight", "bold")
             .text(d.title);
 
-          // Draw triangle (for id > 0)
-          if (i > 0) {
+          // Draw triangle (not for intro courses)
+          if (i != 0 && i != 5 && i != 6 && i != 13) {
             group.append("polygon")
               .attr("points", `${d.x + 125 - 15},${d.y - 20} ${d.x + 125 + 15},${d.y - 20} ${d.x + 125},${d.y}`)
               .attr("fill", "white");
