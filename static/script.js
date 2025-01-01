@@ -125,7 +125,7 @@ function draw(data, lectures) {
           // Progress bar (background and actual bar)
           group.append("rect")
             .attr('x', d.x + 10)
-            .attr('y', d.y + 60)
+            .attr('y', d.y + 50)
             .attr('width', 230)
             .attr('height', 10)
             .attr('fill', 'white')
@@ -134,7 +134,7 @@ function draw(data, lectures) {
 
           group.append("rect")
             .attr('x', d.x + 10)
-            .attr('y', d.y + 60)
+            .attr('y', d.y + 50)
             .attr('width', 0)
             .attr('height', 10)
             .attr('fill', 'green')

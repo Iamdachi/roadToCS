@@ -4,7 +4,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #2E2E2E;
+    background-color: #383838 ;
 }
 
 #sidebar {
@@ -13,7 +13,7 @@ body {
   right: -70%;
   width: 70%;
   height: 100%;
-  background-color: white;
+  background-color: #5e5e5e ;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
   overflow-y: auto;
   transition: right 0.3s ease;
