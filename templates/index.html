@@ -15,7 +15,11 @@
             {% if session["access_token"] %}
                 <li><a href="/logout">Sign Out</a></li>
             {% else %}
-                <li><a href="/signin">Sign In</a></li>
+                <li>
+                    <button type="button" class="login-with-google-btn" onclick="window.location.href='/signin';">
+                      Sign in with Google
+                    </button>
+                </li>
             {% endif %}
         </ul>
     </nav>
