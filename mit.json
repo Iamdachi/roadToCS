@@ -1,18 +1,18 @@
 {
   "data": [
     { "id": 0, "title": "Calculus", "x": 1500, "y": 300 },
-    { "id": 1, "title": "Linear Algebra", "x": 2000, "y": 500 },
-    { "id": 2, "title": "Probability", "x": 1650, "y": 500 },
-    { "id": 3, "title": "Physics", "x": 1350, "y": 500 },
-    { "id": 4, "title": "Machine Learning", "x": 1650, "y": 650 },
+    { "id": 1, "title": "Linear Algebra", "x": 1700, "y": 500 },
+    { "id": 2, "title": "Probability", "x": 1400, "y": 500 },
+    { "id": 3, "title": "Physics", "x": 1100, "y": 500 },
+    { "id": 4, "title": "Machine Learning", "x": 1400, "y": 700 },
     { "id": 5, "title": "Mathematics for CS", "x": 200, "y": 300 },
-    { "id": 6, "title": "Intro to CS using Python", "x": 650, "y": 300 },
+    { "id": 6, "title": "Intro to CS using Python", "x": 500, "y": 300 },
     { "id": 7, "title": "Introduction to Algorithms", "x": 200, "y": 500 },
-    { "id": 8, "title": "Programming Abstractions C++", "x": 650, "y": 500 },
-    { "id": 9, "title": "Systems & Networking", "x": 1050, "y": 500 },
-    { "id": 10, "title": "Computation Structures", "x": 1050, "y": 650 },
-    { "id": 11, "title": "Design and Analysis of Algorithms", "x": 200, "y": 650 },
-    { "id": 12, "title": "Programming Paradigms", "x": 650, "y": 650 }
+    { "id": 8, "title": "Programming Abstractions C++", "x": 500, "y": 500 },
+    { "id": 9, "title": "Systems & Networking", "x": 800, "y": 500 },
+    { "id": 10, "title": "Computation Structures", "x": 800, "y": 700 },
+    { "id": 11, "title": "Design and Analysis of Algorithms", "x": 200, "y": 700 },
+    { "id": 12, "title": "Programming Paradigms", "x": 500, "y": 700 }
   ],
   "paths": [
     ["n0", "n1"],
