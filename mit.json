@@ -12,7 +12,8 @@
     { "id": 9, "title": "Systems & Networking", "x": 800, "y": 500 },
     { "id": 10, "title": "Computation Structures", "x": 800, "y": 700 },
     { "id": 11, "title": "Design and Analysis of Algorithms", "x": 200, "y": 700 },
-    { "id": 12, "title": "Programming Paradigms", "x": 500, "y": 700 }
+    { "id": 12, "title": "Programming Paradigms", "x": 500, "y": 700 },
+    { "id": 13, "title": "Intro to EECS", "x": 1100, "y": 300 }
   ],
   "paths": [
     ["n0", "n1"],
