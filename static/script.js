@@ -186,7 +186,7 @@ function drawPaths(paths) {
 
     // Check if any coordinate is null
     if (x !== null && y !== null && ex !== null && ey !== null) {
-      const pathString = `M ${x} ${y} C ${x} ${y+50}, ${ex} ${ey-60}, ${ex} ${ey-20}`;
+      const pathString = `M ${x} ${y} C ${x} ${y+70}, ${ex} ${ey-90}, ${ex} ${ey-20}`;
       coordinates.push(pathString);
     } else {
       console.warn("Could not find coordinates for path:", path);
@@ -200,7 +200,7 @@ function drawPaths(paths) {
     .attr('d', function(d) { return d; }) // Set the 'd' attribute for the path
     .attr('fill', 'none') // No fill for the curve
     .attr('stroke', 'white') // Stroke color
-    .attr('stroke-width', 2); // Stroke width
+    .attr('stroke-width', 4); // Stroke width
 }
 
 initZoom();
