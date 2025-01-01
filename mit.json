@@ -1,8 +1,8 @@
 {
   "data": [
-    { "id": 0, "title": "Calculus", "x": 1200, "y": 400 },
-    { "id": 1, "title": "Linear Algebra", "x": 850, "y": 600 },
-    { "id": 2, "title": "Probability", "x": 1200, "y": 600 },
+    { "id": 0, "title": "Calculus", "x": 1700, "y": 400 },
+    { "id": 1, "title": "Linear Algebra", "x": 1900, "y": 600 },
+    { "id": 2, "title": "Probability", "x": 1700, "y": 600 },
     { "id": 3, "title": "Physics", "x": 1550, "y": 600 },
     { "id": 4, "title": "Machine Learning", "x": 1850, "y": 750 },
     { "id": 5, "title": "Mathematics for CS", "x": 400, "y": 400 },
