@@ -1,33 +1,31 @@
 {
   "data": [
-    { "id": 0, "title": "Single Variable Calculus", "x": 850, "y": 200 },
-    { "id": 1, "title": "Physics I: Classical Mechanics", "x": 1250, "y": 400 },
-    { "id": 2, "title": "Multivariable Calculus", "x": 1550, "y": 400 },
-    { "id": 3, "title": "Physics II: Electricity and Magnetism", "x": 1550, "y": 600 },
-    { "id": 4, "title": "MORE MATH", "x": 1850, "y": 600 },
+    { "id": 0, "title": "Calculus", "x": 1200, "y": 400 },
+    { "id": 1, "title": "Linear Algebra", "x": 850, "y": 600 },
+    { "id": 2, "title": "Probability", "x": 1200, "y": 600 },
+    { "id": 3, "title": "Physics", "x": 1550, "y": 600 },
+    { "id": 4, "title": "Machine Learning", "x": 1850, "y": 750 },
     { "id": 5, "title": "Mathematics for CS", "x": 400, "y": 400 },
     { "id": 6, "title": "Intro to CS using Python", "x": 850, "y": 400 },
     { "id": 7, "title": "Introduction to Algorithms", "x": 400, "y": 600 },
-    { "id": 8, "title": "Fundamentals Of Programming", "x": 850, "y": 600 },
+    { "id": 8, "title": "Programming Abstractions C++", "x": 850, "y": 600 },
     { "id": 9, "title": "Systems & Networking", "x": 1250, "y": 600 },
     { "id": 10, "title": "Computation Structures", "x": 1250, "y": 750 },
     { "id": 11, "title": "Design and Analysis of Algorithms", "x": 400, "y": 750 },
-    { "id": 12, "title": "Programming Paradigms", "x": 850, "y": 750 },
-    { "id": 13, "title": "Computer Systems Engineering", "x": 1250, "y": 950 }
+    { "id": 12, "title": "Programming Paradigms", "x": 850, "y": 750 }
   ],
   "paths": [
-    ["n0", "n5"],
     ["n0", "n1"],
     ["n0", "n2"],
+    ["n0", "n3"],
     ["n5", "n7"],
     ["n6", "n7"],
     ["n6", "n8"],
     ["n6", "n9"],
-    ["n1", "n3"],
     ["n2", "n4"],
+    ["n1", "n4"],
     ["n9", "n10"],
     ["n3", "n10"],
-    ["n10", "n13"],
     ["n8", "n12"],
     ["n7", "n11"]
   ]
