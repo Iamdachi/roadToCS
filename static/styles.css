@@ -99,11 +99,18 @@ svg {
 p {
   display: block; /* Ensures each <p> starts on a new line */
   flex-direction: column;
+  font-size: 24px; /* Adjust the font size */
+  margin: 10px 0; /* Space between paragraphs */
 }
 #about-content {
   display: flex;
   flex-direction: column; /* Stack children vertically */
-  align-items: flex-start; /* Align paragraphs to the left */
+  align-items: center; /* Center paragraphs horizontally */
+  justify-content: center; /* Center paragraphs vertically */
+  height: 100vh; /* Full viewport height */
+  text-align: center; /* Center the text inside paragraphs */
+  color: white; /* White text color */
+  font-family: 'Arial', sans-serif; /* Or use any other font of your choice */
 }
 
 
