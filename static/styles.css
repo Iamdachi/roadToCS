@@ -136,7 +136,7 @@ p {
 
 p a {
   color: white; /* Blue color for the links */
-  text-decoration: none; /* Underlined by default */
+  text-decoration: underline; /* Underlined by default */
   font-size: 24px; /* Slightly larger font size */
 }
 #about-content {
