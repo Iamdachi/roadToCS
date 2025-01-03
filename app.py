@@ -172,6 +172,10 @@ def welcome():
 def about():
     return render_template("about.html")
 
+@app.route('/mentions')
+def mentions():
+    return render_template("mentions.html")
+
 # Call the userinfo API to get the user's information with a valid access token.
 # This is the first example of using the access token to access an API on the user's behalf.
 def get_user_info(access_token):
