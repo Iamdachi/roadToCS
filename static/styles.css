@@ -74,11 +74,19 @@ nav ul {
   margin: 0;
   padding: 0;
   display: flex;
+  justify-content: space-between;
 }
 nav li {
   margin: 0 15px;
 }
+
+nav ul li:last-child {
+    margin-left: auto;
+}
+
 nav a {
+  position: relative;
+  top: 10px;
   text-decoration: none;
   color: black;
 }
