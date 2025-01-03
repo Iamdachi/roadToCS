@@ -98,6 +98,7 @@ svg {
 
 p {
   display: block; /* Ensures each <p> starts on a new line */
+  flex-direction: column;
 }
 
 
