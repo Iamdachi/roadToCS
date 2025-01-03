@@ -133,6 +133,12 @@ p {
   font-size: 24px; /* Adjust the font size */
   margin: 10px 0; /* Space between paragraphs */
 }
+
+p a {
+  color: blue; /* Blue color for the links */
+  text-decoration: underline; /* Underlined by default */
+  font-size: 18px; /* Slightly larger font size */
+}
 #about-content {
   display: flex;
   flex-direction: column; /* Stack children vertically */
