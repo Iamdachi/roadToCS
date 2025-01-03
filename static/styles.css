@@ -29,13 +29,17 @@ body {
 }
 
 #close-btn {
+  position: absolute; /* Make it absolute relative to the sidebar */
+  top: 10px; /* Adjust the distance from the top */
+  left: 10px; /* Adjust the distance from the left */
   background-color: #ff0000;
   color: white;
   border: none;
   padding: 10px;
   cursor: pointer;
   font-size: 16px;
-  margin-bottom: 10px; /* Space between button and content */
+  margin-bottom: 10px; /* Optional: Space between button and content */
+  border-radius: 5px; /* Optional: Make the button rounded */
 }
 
 #close-btn:hover {
