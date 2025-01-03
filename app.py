@@ -169,7 +169,7 @@ def welcome():
     return render_template("index.html")
 
 @app.route('/about')
-def welcome():
+def about():
     return render_template("about.html")
 
 # Call the userinfo API to get the user's information with a valid access token.
