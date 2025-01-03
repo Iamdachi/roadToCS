@@ -90,6 +90,7 @@ nav a {
   text-decoration: none;
   color: white;
   font-weight: bold;
+  font-family: 'Roboto', sans-serif;
 }
 
 svg {
