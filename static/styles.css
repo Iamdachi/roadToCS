@@ -108,7 +108,7 @@ p {
   align-items: flex-start; /* Center paragraphs horizontally */
   justify-content: center; /* Center paragraphs vertically */
   height: 100vh; /* Full viewport height */
-  text-align: center; /* Center the text inside paragraphs */
+  text-align: left; /* Center the text inside paragraphs */
   color: white; /* White text color */
   font-family: 'Arial', sans-serif; /* Or use any other font of your choice */
 }
