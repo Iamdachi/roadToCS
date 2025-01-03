@@ -46,52 +46,6 @@ function draw(data, lectures) {
     .join(
       enter => enter
         .append("g") // Append group to contain each element
-          .attr('id', `n${i}`)
-          .on('click', function(event, d) {
-              d3.select('#sidebar')
-                .classed('active', true);
-
-              d3.select('#sidebar h2').text(d.title);
-
-              const ul = d3.select('#sidebar ul');
-              ul.selectAll('li').remove();
-
-              const lectureItems = lectures[d.id];
-              if (lectureItems) {
-                ul.selectAll('li')
-                  .data(lectureItems)
-                  .enter()
-                  .append('li')
-                  .each(function(lecture) {
-                    const li = d3.select(this);
-                    li.append('input')
-                      .attr('type', 'checkbox')
-                      .attr('class', 'lecture-checkbox')
-                      .attr('id', `L${d.id}_${lecture.id}`) // Set unique id
-                      .property('checked', lecture.done)
-                      .on('change', function() {
-                        const checkboxes = ul.selectAll('.lecture-checkbox');
-                        const checkedCount = checkboxes.filter(':checked').size();
-                        const totalLectures = checkboxes.size();
-                        const progress = (checkedCount / totalLectures) * 230;
-
-                        d3.select(`.progress-bar-${d.id}`)
-                          .attr('width', progress);
-
-                        // send request
-
-                        handleCheckboxClick(this);
-                      });
-
-                    li.append('a')
-                      .attr('href', lecture.link)
-                      .attr('target', '_blank')
-                      .text(lecture.title);
-                  });
-              } else {
-                console.error(`No lectures found for id: ${d.id}`);
-              }
-            })
         .each(function(d, i) {
           const group = d3.select(this);
 
@@ -103,7 +57,8 @@ function draw(data, lectures) {
             .attr('height', 80)
             .attr('fill', 'rgb(123, 24, 40)')
             .attr('rx', 20)
-            .attr('ry', 20);
+            .attr('ry', 20)
+            .attr('id', `n${i}`);
 
           // Title inside rectangle
           group.append("text")
@@ -142,18 +97,64 @@ function draw(data, lectures) {
             .attr('ry', 5)
             .attr('class', `progress-bar-${i}`);
 
+          // After appending all checkboxes and setting their 'checked' property
+          let checkedCount = 0;
+          lectures[d.id].forEach(entry => {
+            if (entry["done"]) checkedCount++;
+          });
 
-            // After appending all checkboxes and setting their 'checked' property
-            let checkedCount = 0;
-            lectures[d.id].forEach(entry => {
-              if (entry["done"]) checkedCount++;
-            });
-
-            const totalLectures = lectures[d.id].length;
-            const progress = (checkedCount / totalLectures) * 230;
+          const totalLectures = lectures[d.id].length;
+          const progress = (checkedCount / totalLectures) * 230;
 
           d3.select(`.progress-bar-${i}`)
             .attr('width', progress);
+
+          // Add click event listener to the entire group
+          group.on('click', function() {
+            d3.select('#sidebar')
+              .classed('active', true);
+
+            d3.select('#sidebar h2').text(d.title);
+
+            const ul = d3.select('#sidebar ul');
+            ul.selectAll('li').remove();
+
+            const lectureItems = lectures[d.id];
+            if (lectureItems) {
+              ul.selectAll('li')
+                .data(lectureItems)
+                .enter()
+                .append('li')
+                .each(function(lecture) {
+                  const li = d3.select(this);
+                  li.append('input')
+                    .attr('type', 'checkbox')
+                    .attr('class', 'lecture-checkbox')
+                    .attr('id', `L${d.id}_${lecture.id}`) // Set unique id
+                    .property('checked', lecture.done)
+                    .on('change', function() {
+                      const checkboxes = ul.selectAll('.lecture-checkbox');
+                      const checkedCount = checkboxes.filter(':checked').size();
+                      const totalLectures = checkboxes.size();
+                      const progress = (checkedCount / totalLectures) * 230;
+
+                      d3.select(`.progress-bar-${d.id}`)
+                        .attr('width', progress);
+
+                      // send request
+                      handleCheckboxClick(this);
+                    });
+
+                  li.append('a')
+                    .attr('href', lecture.link)
+                    .attr('target', '_blank')
+                    .text(lecture.title);
+                });
+            } else {
+              console.error(`No lectures found for id: ${d.id}`);
+            }
+          });
+
         })
     );
 
@@ -163,6 +164,7 @@ function draw(data, lectures) {
       .classed('active', false);
   });
 }
+
 
 
 function drawPaths(paths) {
