@@ -46,20 +46,8 @@ function draw(data, lectures) {
     .join(
       enter => enter
         .append("g") // Append group to contain each element
-        .each(function(d, i) {
-          const group = d3.select(this);
-
-          // Main rectangle
-          group.append("rect")
-            .attr('x', d.x)
-            .attr('y', d.y)
-            .attr('width', 250)
-            .attr('height', 80)
-            .attr('fill', 'rgb(123, 24, 40)')
-            .attr('rx', 20)
-            .attr('ry', 20)
-            .attr('id', `n${i}`)
-            .on('click', function(event, d) {
+          .attr('id', `n${i}`)
+          .on('click', function(event, d) {
               d3.select('#sidebar')
                 .classed('active', true);
 
@@ -103,7 +91,19 @@ function draw(data, lectures) {
               } else {
                 console.error(`No lectures found for id: ${d.id}`);
               }
-            });
+            })
+        .each(function(d, i) {
+          const group = d3.select(this);
+
+          // Main rectangle
+          group.append("rect")
+            .attr('x', d.x)
+            .attr('y', d.y)
+            .attr('width', 250)
+            .attr('height', 80)
+            .attr('fill', 'rgb(123, 24, 40)')
+            .attr('rx', 20)
+            .attr('ry', 20);
 
           // Title inside rectangle
           group.append("text")
