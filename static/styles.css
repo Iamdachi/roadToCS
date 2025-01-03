@@ -96,6 +96,10 @@ svg {
   margin-top: 50px; /* Adjust to ensure SVG does not overlap with navbar */
 }
 
+p {
+  display: block; /* Ensures each <p> starts on a new line */
+}
+
 
 /* Login Button */
 .login-with-google-btn {
