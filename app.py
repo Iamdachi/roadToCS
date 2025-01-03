@@ -155,8 +155,6 @@ def oauth2callback():
 # It shows the user info's information if they already are.
 @app.route('/')
 def welcome():
-    print("session is: ")
-    print(session)
     if "access_token" in session:
         user_info = get_user_info(session["access_token"])
         if user_info:
@@ -169,6 +167,10 @@ def welcome():
             '''
             return render_template("index.html")
     return render_template("index.html")
+
+@app.route('/about')
+def welcome():
+    return render_template("about.html")
 
 # Call the userinfo API to get the user's information with a valid access token.
 # This is the first example of using the access token to access an API on the user's behalf.
