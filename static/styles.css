@@ -105,7 +105,7 @@ p {
 #about-content {
   display: flex;
   flex-direction: column; /* Stack children vertically */
-  align-items: center; /* Center paragraphs horizontally */
+  align-items: flex-start; /* Center paragraphs horizontally */
   justify-content: center; /* Center paragraphs vertically */
   height: 100vh; /* Full viewport height */
   text-align: center; /* Center the text inside paragraphs */
