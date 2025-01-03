@@ -61,6 +61,32 @@ body {
   margin-bottom: 10px; /* Optional: Add space between items */
 }
 
+/* Styling for a tags inside the sidebar */
+#sidebar a {
+  color: blue; /* Blue color for the links */
+  text-decoration: underline; /* Underlined by default */
+  font-size: 18px; /* Slightly larger font size */
+}
+
+#sidebar a:visited {
+  color: blue; /* Keep the link blue even after being visited */
+  text-decoration: underline; /* Keep the underline */
+}
+
+#sidebar a:hover {
+  color: darkblue; /* Optional: Change color on hover */
+  text-decoration: none; /* Optional: Remove underline on hover */
+}
+
+/* Styling for input checkbox inside the sidebar */
+#sidebar input[type="checkbox"] {
+  width: 18px; /* Adjust the width of the checkbox */
+  height: 18px; /* Adjust the height of the checkbox */
+  margin-right: 8px; /* Space between checkbox and label */
+  vertical-align: middle; /* Align checkbox with the text */
+}
+
+
 nav {
   display: flex;
   justify-content: flex-start;
