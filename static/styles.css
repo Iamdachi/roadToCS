@@ -160,6 +160,7 @@ p a {
 
 #about-content p {
     margin-bottom: 20px;
+  white-space: pre-line;
 }
 
 @media (max-width: 768px) {
