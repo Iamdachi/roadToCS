@@ -144,10 +144,12 @@ p a {
 
 /* Main Content */
 #about-content {
+    overflow-y: auto;
     padding: 15px;
     text-align: justify; /* For better readability */
     color: white; /* White text color */
     font-family: 'Arial', sans-serif; /* Or use any other font */
+    width: 100%;
 }
 
 #about-content h2 {
@@ -158,6 +160,17 @@ p a {
 
 #about-content p {
     margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    #about-content {
+        width: 100%;
+        padding: 15px;
+    }
 }
 
 
