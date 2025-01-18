@@ -9,8 +9,11 @@ import requests
 
 app = Flask('app')
 app.config['SESSION_COOKIE_SECURE'] = True
-app.secret_key = os.environ.get('FLASK_SECRET_KEY') # or os.urandom(24)
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.secret_key = os.environ.get('FLASK_SECRET_KEY')
+app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+app.config['PREFERRED_URL_SCHEME'] = 'https'
 
 db = SQLAlchemy(app)
 login = LoginManager(app)
@@ -204,7 +207,6 @@ def get_roadmap_data():
 
 @app.route('/mit-lectures')
 def get_lectures_data():
-
     with open('lectures.json') as f:
         lectures = json.load(f)
         if current_user.is_authenticated:
