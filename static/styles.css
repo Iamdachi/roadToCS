@@ -143,14 +143,16 @@ p a {
 #about-content {
   display: flex;
   flex-direction: column; /* Stack children vertically */
-  align-items: flex-start; /* Center paragraphs horizontally */
-  justify-content: center; /* Center paragraphs vertically */
-  height: 100vh; /* Full viewport height */
-  text-align: left; /* Center the text inside paragraphs */
+  align-items: flex-start; /* Align content to the left */
+  justify-content: center; /* Center content vertically */
+  min-height: 100vh; /* Ensure content takes at least full viewport height */
+  padding: 10% 10% 0; /* Add 10% padding to the top, and 10% to the left and right */
+  box-sizing: border-box; /* Include padding in total size calculation */
+  text-align: left; /* Align text inside paragraphs to the left */
   color: white; /* White text color */
-  font-family: 'Arial', sans-serif; /* Or use any other font of your choice */
-  padding: 10% 10% 0; /* Add 10% padding to the left and right */
+  font-family: 'Arial', sans-serif; /* Or use any other font */
 }
+
 
 
 
