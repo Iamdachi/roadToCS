@@ -4,203 +4,117 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #3D405B ;
+    background-color: #3D405B;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 #sidebar {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 70%;
-  height: 100%;
-  background-color: #5e5e5e ;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-  overflow-y: auto;
-  transition: right 0.3s ease;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column; /* Stack children vertically */
-  padding: 10px;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    height: 100%;
+    background-color: #5e5e5e;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    word-wrap: break-word; /* Prevent text overflow */
 }
 
 #sidebar.active {
-  right: 0; /* Slide into view */
-  /* Remove display: block */
+    right: 0;
 }
 
 #close-btn {
-  position: absolute; /* Make it absolute relative to the sidebar */
-  top: 10px; /* Adjust the distance from the top */
-  left: 10px; /* Adjust the distance from the left */
-  background-color: #ff0000;
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-bottom: 10px; /* Optional: Space between button and content */
-  border-radius: 5px; /* Optional: Make the button rounded */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 5px;
 }
-
-#close-btn:hover {
-  background-color: #cc0000;
-}
-
-#sidebar-content {
-  flex-grow: 1; /* Takes remaining space for content */
-  padding: 10px;
-}
-
-#sidebar ul {
-  list-style-type: none; /* Remove bullets */
-  padding: 0; /* Remove padding */
-  margin: 0; /* Remove margin */
-}
-
-#sidebar ul li {
-  margin-bottom: 10px; /* Optional: Add space between items */
-}
-
-/* Styling for a tags inside the sidebar */
-#sidebar a {
-  color: blue; /* Blue color for the links */
-  text-decoration: underline; /* Underlined by default */
-  font-size: 18px; /* Slightly larger font size */
-}
-
-#sidebar a:visited {
-  color: blue; /* Keep the link blue even after being visited */
-  text-decoration: underline; /* Keep the underline */
-}
-
-#sidebar a:hover {
-  color: darkblue; /* Optional: Change color on hover */
-  text-decoration: none; /* Optional: Remove underline on hover */
-}
-
-/* Styling for input checkbox inside the sidebar */
-#sidebar input[type="checkbox"] {
-  width: 18px; /* Adjust the width of the checkbox */
-  height: 18px; /* Adjust the height of the checkbox */
-  margin-right: 8px; /* Space between checkbox and label */
-  vertical-align: middle; /* Align checkbox with the text */
-}
-
 
 nav {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: flex-start;
-  background-color: #1b2631;
-  padding: 10px;
-  top: 0;
-  left: 0;
-  position: fixed; /* Fixes the navbar to the top */
-  width: 100%; /* Makes the navbar span the full width of the screen */
-  z-index: 1000; /* Ensures the navbar stays on top of other content */
-}
-nav ul {
-  list-style: none;
-  margin: 0;
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  padding: 0 20px;
-}
-nav li {
-  margin: 0 15px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+    background-color: #1b2631;
+    padding: 10px;
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
-nav ul li:last-child {
-    margin-left: auto;
+nav ul {
+    list-style: none;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0 10px;
+    overflow-x: auto; /* Allow horizontal scrolling on smaller screens */
+}
+
+nav li {
+    margin: 0 10px;
 }
 
 nav a {
-  position: relative;
-  top: 10px;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    white-space: nowrap; /* Prevent text from breaking in nav links */
 }
 
-svg {
-  margin-top: 50px; /* Adjust to ensure SVG does not overlap with navbar */
-}
-
-p {
-  display: block; /* Ensures each <p> starts on a new line */
-  flex-direction: column;
-  font-size: 24px; /* Adjust the font size */
-  margin: 10px 0; /* Space between paragraphs */
-}
-
-p a {
-  color: white; /* Blue color for the links */
-  text-decoration: underline; /* Underlined by default */
-  font-size: 24px; /* Slightly larger font size */
-}
-
-
-/* Main Content */
 #about-content {
     padding: 15px;
-    text-align: justify; /* For better readability */
-    color: white; /* White text color */
-    font-family: 'Arial', sans-serif; /* Or use any other font */
+    text-align: justify;
+    color: white;
+    line-height: 1.5; /* Improve readability */
+    font-size: 1rem; /* Use responsive font size */
 }
 
 #about-content h2 {
     text-align: center;
     margin-bottom: 20px;
-    font-size: 1.8rem;
+    font-size: 1.5rem; /* Adjust for smaller screens */
 }
 
 #about-content p {
     margin-bottom: 20px;
 }
 
+p {
+    font-size: 1rem; /* Responsive font size */
+    line-height: 1.6;
+    margin: 10px 0;
+    word-wrap: break-word; /* Ensure text stays within the screen */
+}
 
-
-/* Login Button */
 .login-with-google-btn {
-  transition: background-color .3s, box-shadow .3s;
+    padding: 12px;
+    border-radius: 3px;
+    background-color: white;
+    font-size: 1rem;
+    display: block;
+    width: 100%; /* Make it full-width on mobile */
+    text-align: center;
+}
 
-  padding: 12px 16px 12px 42px;
-  border: none;
-  border-radius: 3px;
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
-
-  color: #757575;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
-
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
-  background-color: white;
-  background-repeat: no-repeat;
-  background-position: 12px 11px;
-
-  &:hover {
-    box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
-  }
-
-  &:active {
-    background-color: #eeeeee;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow:
-      0 -1px 0 rgba(0, 0, 0, .04),
-      0 2px 4px rgba(0, 0, 0, .25),
-      0 0 0 3px #c8dafc;
-  }
-
-  &:disabled {
-    filter: grayscale(100%);
-    background-color: #ebebeb;
-    box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
-    cursor: not-allowed;
-  }
+svg {
+    margin-top: 60px; /* Adjust to avoid overlap with navbar */
+    max-width: 100%; /* Ensure SVGs scale on mobile */
 }
