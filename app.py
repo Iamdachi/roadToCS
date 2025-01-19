@@ -93,7 +93,7 @@ def update_lecture_status():
     if not lecture_id:
         return jsonify({'error': 'Invalid data'}), 400
 
-    # Fetch the lecture by ID
+    # Fetch the lecture by name
     lecture = Lecture.query.filter_by(name=lecture_id).first()
     if not lecture:
         return jsonify({'error': 'Lecture not found ' + lecture_id}), 404

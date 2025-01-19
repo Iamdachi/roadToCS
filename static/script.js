@@ -15,7 +15,6 @@ function handleZoom(e) {
 
 function handleCheckboxClick(checkbox) {
   const lectureId = checkbox.getAttribute('id');
-  console.log(lectureId);
   const isChecked = checkbox.checked;
 
   fetch('/update-lecture-status', {
@@ -35,8 +34,9 @@ function handleCheckboxClick(checkbox) {
   .catch((error) => {
     console.error('Error:', error);
   });
-}
 
+  // sidebar is drawn from lectres
+}
 
 function draw(data, lectures) {
   const svgGroup = d3.select('svg g');
@@ -111,15 +111,19 @@ function draw(data, lectures) {
 
           // Add click event listener to the entire group
           group.on('click', function() {
+            // Activate sidebar
             d3.select('#sidebar')
               .classed('active', true);
 
+            // Sidebar title
             d3.select('#sidebar h2').text(d.title).style('color', 'white');
 
+            // Unordered List : all lectures
             const ul = d3.select('#sidebar ul');
             ul.selectAll('li').remove();
 
-            const lectureItems = lectures[d.id];
+            // lectures.json entry for given mit.json subject
+            const lectureItems = lectures[d.id];   // d : mit.json entry;
             if (lectureItems) {
               ul.selectAll('li')
                 .data(lectureItems)
@@ -130,7 +134,7 @@ function draw(data, lectures) {
                   li.append('input')
                     .attr('type', 'checkbox')
                     .attr('class', 'lecture-checkbox')
-                    .attr('id', `L${d.id}_${lecture.id}`) // Set unique id
+                    .attr('id', `L${d.id}_${lecture.id}`) // Set unique id  L5_0
                     .property('checked', lecture.done)
                     .on('change', function() {
                       const checkboxes = ul.selectAll('.lecture-checkbox');
@@ -212,7 +216,9 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch('/mit-lectures').then(response => response.json()),
     fetch('/mit-roadmap').then(response => response.json())
   ]).then(([lecturesResponse, roadmapResponse]) => {
-    const lectures = lecturesResponse;
+    let lectures = lecturesResponse; // later will be modified by clickbox
+    console.log("LECTURES BUDDY")
+    console.log(lectures)
     const data = roadmapResponse.data;
     const paths = roadmapResponse.paths;
 
