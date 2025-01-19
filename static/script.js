@@ -240,12 +240,13 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch('/mit-roadmap').then(response => response.json())
   ]).then(([lecturesResponse, roadmapResponse]) => {
 
-    if (localStorage.getItem('lectures') !== null) {
+    if (localStorage.getItem('lectures') === null) {
     // Variable exists
         localStorage.setItem('lectures', JSON.stringify(lecturesResponse));
+        lectures = lecturesResponse; //
+    } else {
+        lectures = localStorage.getItem('lectures'); // later will be modified by clickbox
     }
-
-    lectures = lecturesResponse; // later will be modified by clickbox
 
     const data = roadmapResponse.data;
     const paths = roadmapResponse.paths;
