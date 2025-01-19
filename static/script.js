@@ -131,7 +131,8 @@ function draw(data, lectures) {
             ul.selectAll('li').remove();
 
             // lectures.json entry for given mit.json subject
-            const lectureItems = lectures[d.id];   // d : mit.json entry;
+            //const lectureItems = lectures[d.id];   // d : mit.json entry; // OLD THAT WORKED FINE BUT GET THIS SHIT FROM LOCAL COOKIE
+            const lectureItems = localStorage.getItem('lectures')[d.id];
             if (lectureItems) {
               ul.selectAll('li')
                 .data(lectureItems)
