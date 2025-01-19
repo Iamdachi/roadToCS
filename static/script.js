@@ -144,7 +144,9 @@ function draw(data, lectures) {
 
             // lectures.json entry for given mit.json subject
             //const lectureItems = lectures[d.id];   // d : mit.json entry; // OLD THAT WORKED FINE BUT GET THIS SHIT FROM LOCAL COOKIE
-            const lectureItems = localStorage.getItem('lectures')[d.id];
+            const lectures = JSON.parse(localStorage.getItem('lectures')) || {};
+            const lectureItems = lectures[d.id];
+
             if (lectureItems) {
               ul.selectAll('li')
                 .data(lectureItems)
