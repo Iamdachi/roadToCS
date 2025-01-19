@@ -132,7 +132,7 @@ function draw(data, lectures) {
 
             // lectures.json entry for given mit.json subject
             //const lectureItems = lectures[d.id];   // d : mit.json entry; // OLD THAT WORKED FINE BUT GET THIS SHIT FROM LOCAL COOKIE
-            const lectureItems = lectures[d.id];
+            const lectureItems = localStorage.getItem('lectures')[d.id];
             if (lectureItems) {
               ul.selectAll('li')
                 .data(lectureItems)
@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (localStorage.getItem('lectures') !== null) {
     // Variable exists
-        localStorage.setItem('lectures', lecturesResponse);
+        localStorage.setItem('lectures', JSON.stringify(lecturesResponse));
     }
 
     lectures = lecturesResponse; // later will be modified by clickbox
