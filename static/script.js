@@ -222,6 +222,8 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("------------------------------------------------")
     console.log(typeof lectures)
     console.log(lectures[0][0])
+    lectures[0][0].done = true;
+    console.log(lectures[0][0])
 
     const data = roadmapResponse.data;
     const paths = roadmapResponse.paths;
