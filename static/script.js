@@ -219,6 +219,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let lectures = lecturesResponse; // later will be modified by clickbox
     console.log("LECTURES BUDDY")
     console.log(lectures)
+    console.log("------------------------------------------------")
+    console.log(typeof lectures)
+    console.log(lectures[0][0])
+
     const data = roadmapResponse.data;
     const paths = roadmapResponse.paths;
 
