@@ -42,7 +42,7 @@ function handleCheckboxClick(checkbox) {
   const course_id = 0;
   const lec_id = 0;
   const[c,l] = parseLecId(lectureId);
-  lectures[0][0].done = true;
+  lectures[c][l].done = true;
 }
 
 function draw(data, lectures) {
