@@ -132,14 +132,9 @@ function draw(data, lectures) {
 
             // lectures.json entry for given mit.json subject
             //const lectureItems = lectures[d.id];   // d : mit.json entry; // OLD THAT WORKED FINE BUT GET THIS SHIT FROM LOCAL COOKIE
-            fetch('/mit-lectures')
-              .then(response => response.json())
-              .then(lecturesResponse => {
-                if (localStorage.getItem('lectures') === null) {
-                  localStorage.setItem('lectures', JSON.stringify(lecturesResponse));
-                }
-              });
             const lectureItems = localStorage.getItem('lectures')[d.id];
+            console.log("SIDEBAR ACTIVE__________")
+            console.log(lectureItems)
             if (lectureItems) {
               ul.selectAll('li')
                 .data(lectureItems)
