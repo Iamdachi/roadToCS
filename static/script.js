@@ -15,6 +15,18 @@ function handleZoom(e) {
 		.attr('transform', e.transform);
 }
 
+function parseLecId(str) {
+    const match = str.match(/^L(\d+)_(\d+)$/);
+
+    if (match) {
+      const num1 = parseInt(match[1], 10);
+      const num2 = parseInt(match[2], 10);
+      return [num1, num2];
+    } else {
+      console.log("String format is incorrect");
+    }
+}
+
 function handleCheckboxClick(checkbox) {
   const lectureId = checkbox.getAttribute('id');
   const isChecked = checkbox.checked;
@@ -242,18 +254,5 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("Error loading data:", error);
   });
 });
-
-
-function parseLecId(str) {
-    const match = str.match(/^L(\d+)_(\d+)$/);
-
-    if (match) {
-      const num1 = parseInt(match[1], 10);
-      const num2 = parseInt(match[2], 10);
-      return [num1, num2];
-    } else {
-      console.log("String format is incorrect");
-    }
-}
 
 
