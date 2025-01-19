@@ -228,12 +228,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (localStorage.getItem('lectures') !== null) {
     // Variable exists
         localStorage.setItem('lectures', lecturesResponse);
-        lectures = lecturesResponse;
-    } else {
-    // Variable does not exist
     }
 
-    //lectures = lecturesResponse; // later will be modified by clickbox
+    lectures = lecturesResponse; // later will be modified by clickbox
 
     const data = roadmapResponse.data;
     const paths = roadmapResponse.paths;
