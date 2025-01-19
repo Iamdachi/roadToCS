@@ -13,7 +13,7 @@ body {
   right: -100%;
   width: 70%;
   height: 100%;
-  background-color: #5e5e5e ;
+  background-color: #0b1116 ;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
   overflow-y: auto;
   transition: right 0.3s ease;
@@ -63,14 +63,14 @@ body {
 
 /* Styling for a tags inside the sidebar */
 #sidebar a {
-  color: blue; /* Blue color for the links */
-  text-decoration: underline; /* Underlined by default */
+  color: white; /* Blue color for the links */
   font-size: 18px; /* Slightly larger font size */
+  font-weight: bold;
 }
 
 #sidebar a:visited {
-  color: blue; /* Keep the link blue even after being visited */
-  text-decoration: underline; /* Keep the underline */
+  color: white; /* Keep the link white even after being visited */
+  text-decoration: none; /* remove the underline */
 }
 
 #sidebar a:hover {
@@ -137,7 +137,7 @@ p {
 
 p a {
   color: white; /* Blue color for the links */
-  text-decoration: underline; /* Underlined by default */
+  text-decoration: none; /* Underlined by default */
   font-size: 24px; /* Slightly larger font size */
 }
 
