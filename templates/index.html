@@ -21,7 +21,7 @@
                 </li>
             {% else %}
                 <li>
-                    <button type="button" class="login-with-google-btn" onclick="window.location.href='/signin';">
+                    <button type="button" class="login-with-google-btn" onclick="localStorage.removeItem('lectures');window.location.href='/signin';">
                       Sign in with Google
                     </button>
                 </li>

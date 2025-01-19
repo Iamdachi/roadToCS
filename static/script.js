@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (localStorage.getItem('lectures') === null) {
     // Variable does not exist
         localStorage.setItem('lectures', JSON.stringify(lecturesResponse));
-        lectures = lecturesResponse; //
+        lectures = lecturesResponse;
     } else {
         lectures = JSON.parse(localStorage.getItem('lectures')); // later will be modified by clickbox
     }
