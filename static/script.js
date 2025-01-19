@@ -1,3 +1,5 @@
+let lectures;
+
 let zoom = d3.zoom()
 	.scaleExtent([0.25, 10])
 	.on('zoom', handleZoom);
@@ -36,6 +38,11 @@ function handleCheckboxClick(checkbox) {
   });
 
   // sidebar is drawn from lectres
+  // TODO parse checkbox id
+  const course_id = 0;
+  const lec_id = 0;
+  const[c,l] = parseLecId(lectureId);
+  lectures[0][0].done = true;
 }
 
 function draw(data, lectures) {
@@ -216,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch('/mit-lectures').then(response => response.json()),
     fetch('/mit-roadmap').then(response => response.json())
   ]).then(([lecturesResponse, roadmapResponse]) => {
-    let lectures = lecturesResponse; // later will be modified by clickbox
+    lectures = lecturesResponse; // later will be modified by clickbox
     console.log("LECTURES BUDDY")
     console.log(lectures)
     console.log("------------------------------------------------")
@@ -234,5 +241,18 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("Error loading data:", error);
   });
 });
+
+
+function parseLecId(str) {
+    const match = str.match(/^L(\d+)_(\d+)$/);
+
+    if (match) {
+      const num1 = parseInt(match[1], 10);
+      const num2 = parseInt(match[2], 10);
+      return [num1, num2];
+    } else {
+      console.log("String format is incorrect");
+    }
+}
 
 
