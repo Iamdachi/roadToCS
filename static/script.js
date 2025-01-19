@@ -43,7 +43,7 @@ function handleCheckboxClick(checkbox) {
   const lec_id = 0;
   const[c,l] = parseLecId(lectureId);
   lectures[c][l].done = true;
-  localStorage.setItem('lectures', lectures);
+  localStorage.setItem('lectures', JSON.stringify(lectures));
 }
 
 function draw(data, lectures) {
