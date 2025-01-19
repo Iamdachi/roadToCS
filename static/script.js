@@ -114,7 +114,7 @@ function draw(data, lectures) {
             d3.select('#sidebar')
               .classed('active', true);
 
-            d3.select('#sidebar h2').text(d.title);
+            d3.select('#sidebar h2').text(d.title).style('color', 'white');
 
             const ul = d3.select('#sidebar ul');
             ul.selectAll('li').remove();

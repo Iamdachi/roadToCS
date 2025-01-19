@@ -66,6 +66,7 @@ body {
   color: white; /* Blue color for the links */
   font-size: 18px; /* Slightly larger font size */
   font-weight: bold;
+  text-decoration: none;
 }
 
 #sidebar a:visited {
@@ -74,7 +75,7 @@ body {
 }
 
 #sidebar a:hover {
-  color: darkblue; /* Optional: Change color on hover */
+  color: antiquewhite; /* Optional: Change color on hover */
   text-decoration: none; /* Optional: Remove underline on hover */
 }
 
