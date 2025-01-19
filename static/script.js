@@ -43,6 +43,7 @@ function handleCheckboxClick(checkbox) {
   const lec_id = 0;
   const[c,l] = parseLecId(lectureId);
   lectures[c][l].done = true;
+  localStorage.setItem('lectures', lectures);
 }
 
 function draw(data, lectures) {
@@ -223,14 +224,16 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch('/mit-lectures').then(response => response.json()),
     fetch('/mit-roadmap').then(response => response.json())
   ]).then(([lecturesResponse, roadmapResponse]) => {
-    lectures = lecturesResponse; // later will be modified by clickbox
-    console.log("LECTURES BUDDY")
-    console.log(lectures)
-    console.log("------------------------------------------------")
-    console.log(typeof lectures)
-    console.log(lectures[0][0])
-    lectures[0][0].done = true;
-    console.log(lectures[0][0])
+
+    if (localStorage.getItem('lectures') !== null) {
+    // Variable exists
+        localStorage.setItem('lectures', lecturesResponse);
+        lectures = lecturesResponse;
+    } else {
+    // Variable does not exist
+    }
+
+    //lectures = lecturesResponse; // later will be modified by clickbox
 
     const data = roadmapResponse.data;
     const paths = roadmapResponse.paths;
