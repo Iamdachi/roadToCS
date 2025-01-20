@@ -10,6 +10,7 @@ import requests
 app = Flask('app')
 app.config['SESSION_COOKIE_SECURE'] = True
 app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_NAME'] = 'your_session_cookie'
 app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
