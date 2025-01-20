@@ -66,22 +66,6 @@ def populate_lectures(db):
             db.session.add(lecture_entry)
 
     db.session.commit()
-    print("POPULATED LCTURES")
-
-## usage
-'''
-user = User.query.get(1)  # Fetch user with ID 1
-course = Course.query.get(2)  # Fetch course with ID 2
-user.courses.append(course)
-db.session.commit()
-
-user = User.query.get(1)
-print([course.name for course in user.courses])
-
-course = Course.query.get(2)
-print([student.username for student in course.students])
-
-'''
 
 @app.route('/update-lecture-status', methods=['POST'])
 @login_required
@@ -141,7 +125,7 @@ def oauth2callback():
         oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
         session['access_token'] = oauth_flow.credentials.token
     except Exception as e:
-        return f'Error during OAuth flow: {str(e)}', 500  # Return an error if fetching the token fails
+        return f'Error during OAuth flow: {str(e)} and session state is {session['state']} compared to requests {request.args['state']}', 500  # Return an error if fetching the token fails
 
     # find or create the user in the database
     user_info = get_user_info(session["access_token"])
@@ -163,13 +147,6 @@ def welcome():
     if "access_token" in session:
         user_info = get_user_info(session["access_token"])
         if user_info:
-            '''
-            return f"""
-                Hello {user_info}!<br>
-                Your email address is {user_info["email"]}<br>
-                <a href="/logout">Log out</a>
-            """
-            '''
             return render_template("index.html")
     return render_template("index.html")
 
