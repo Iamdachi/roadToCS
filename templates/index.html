@@ -15,7 +15,7 @@
             <li><a href="/mentions">Honorable Mentions</a></li>
             {% if session["access_token"] %}
                 <li>
-                    <button type="button" class="login-with-google-btn" onclick="window.location.href='/logout';">
+                    <button type="button" class="login-with-google-btn" onclick="localStorage.removeItem('lectures');window.location.href='/logout';">
                       Sign out
                     </button>
                 </li>

@@ -131,15 +131,17 @@ def signin():
 # APIs on behalf of the user.
 @app.route('/oauth2callback')
 def oauth2callback():
-    print("session is: ")
-    print(session)
-    if not session['state'] == request.args['state']:
-        return 'Invalid state parameter', 400
-  
-    oauth_flow.redirect_uri = url_for('oauth2callback', _external=True).replace('http://', 'https://') # i added this
+    # Check if the state is in the session and matches the state from the callback
+    if 'state' not in session or session['state'] != request.args['state']:
+        return 'Invalid or missing state parameter', 400  # 400 Bad Request if state is missing or incorrect
 
-    oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
-    session['access_token'] = oauth_flow.credentials.token
+    try:
+        # Proceed to fetch the token
+        oauth_flow.redirect_uri = url_for('oauth2callback', _external=True).replace('http://', 'https://')
+        oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
+        session['access_token'] = oauth_flow.credentials.token
+    except Exception as e:
+        return f'Error during OAuth flow: {str(e)}', 500  # Return an error if fetching the token fails
 
     # find or create the user in the database
     user_info = get_user_info(session["access_token"])
