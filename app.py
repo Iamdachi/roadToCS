@@ -14,6 +14,7 @@ app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_NAME'] = 'your_session_cookie'
 app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['PREFERRED_URL_SCHEME'] = 'https'
 
