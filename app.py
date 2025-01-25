@@ -149,8 +149,6 @@ def oauth2callback():
         auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
     )
 
-    return(request.base_url)
-
     # Parse the tokens!
     client.parse_request_body_response(json.dumps(token_response.json()))
 
