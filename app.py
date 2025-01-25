@@ -149,9 +149,9 @@ def oauth2callback():
         auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
     )
 
-    return("response is: " + str(token_response.json()))
+    #return("response is: " + str(token_response.json()))
 
-    # Parse the tokens!
+    # Parse the tokens!s
     client.parse_request_body_response(json.dumps(token_response.json()))
 
     # Now that you have tokens (yay) let's find and hit the URL
