@@ -128,7 +128,7 @@ def signin():
 def oauth2callback():
     # Get authorization code Google sent back to you
     code = request.args.get("code")
-    return(code)
+
 
     # Find out what URL to hit to get tokens that allow you to ask for
     # things on behalf of a user
@@ -148,6 +148,7 @@ def oauth2callback():
         data=body,
         auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
     )
+    return(token_response)
 
     # Parse the tokens!
     client.parse_request_body_response(json.dumps(token_response.json()))
