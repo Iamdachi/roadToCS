@@ -127,7 +127,8 @@ def oauth2callback():
         oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
         session['access_token'] = oauth_flow.credentials.token
     except Exception as e:
-        return f"Error during OAuth flow: {str(e)} and session state is {session['state']} compared to requests {request.args['state']}", 500 # Return an error if fetching the token fails
+        //return f"Error during OAuth flow: {str(e)} and session state is {session['state']} compared to requests {request.args['state']}", 500 # Return an error if fetching the token fails
+        pass
 
     # find or create the user in the database
     user_info = get_user_info(session["access_token"])
