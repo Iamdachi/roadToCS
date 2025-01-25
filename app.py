@@ -70,6 +70,9 @@ def populate_lectures(db):
 
     db.session.commit()
 
+def get_google_provider_cfg():
+    return requests.get(GOOGLE_DISCOVERY_URL).json()
+
 @app.route('/update-lecture-status', methods=['POST'])
 @login_required
 def update_lecture_status():
