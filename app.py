@@ -124,7 +124,6 @@ def oauth2callback():
 
     try:
         # Proceed to fetch the token
-        oauth_flow.redirect_uri = url_for('oauth2callback', _external=True).replace('http://', 'https://')
         oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
         session['access_token'] = oauth_flow.credentials.token
     except Exception as e:
