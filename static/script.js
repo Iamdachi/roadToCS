@@ -54,7 +54,7 @@ function handleCheckboxClick(checkbox) {
   const course_id = 0;
   const lec_id = 0;
   const[c,l] = parseLecId(lectureId);
-  lectures[c][l].done = true;
+  lectures[c][l].done = isChecked;
   localStorage.setItem('lectures', JSON.stringify(lectures));
 }
 
