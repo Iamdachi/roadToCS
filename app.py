@@ -115,8 +115,8 @@ def signin():
     # scopes that let you retrieve user's profile from Google
     request_uri = client.prepare_request_uri(
         authorization_endpoint,
-        redirect_uri=request.base_url + "oauth2callback",
-        scope=["https://www.googleapis.com/auth/userinfo.email"],
+        redirect_uri=request.host_url + "oauth2callback",
+        scope=["openid", "https://www.googleapis.com/auth/userinfo.email"],
     )
     return redirect(request_uri)
 
