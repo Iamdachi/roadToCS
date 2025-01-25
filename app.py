@@ -116,7 +116,7 @@ def signin():
     request_uri = client.prepare_request_uri(
         authorization_endpoint,
         redirect_uri=request.host_url + "oauth2callback",
-        scope=["openid", "email"],
+        scope=["email"],
     )
     return redirect(request_uri)
 
