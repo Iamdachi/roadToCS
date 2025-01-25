@@ -125,7 +125,7 @@ def oauth2callback():
     oauth_flow.redirect_uri = url_for('oauth2callback', _external=True).replace('http://', 'https://')
     oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
     session['access_token'] = oauth_flow.credentials.token
-    return(oauth_flow.credentials.token)
+    #return(oauth_flow.credentials.token)
 
     # find or create the user in the database
     user_info = get_user_info(session["access_token"])
