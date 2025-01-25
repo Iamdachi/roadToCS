@@ -121,14 +121,10 @@ def oauth2callback():
     if 'state' not in session or session['state'] != request.args['state']:
         return 'Invalid or missing state parameter', 400  # 400 Bad Request if state is missing or incorrect
 
-    try:
-        # Proceed to fetch the token
-        oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
-        session['access_token'] = oauth_flow.credentials.token
-        return(oauth_flow.credentials.token)
-    except Exception as e:
-        #return f"Error during OAuth flow: {str(e)} and session state is {session['state']} compared to requests {request.args['state']}", 500 # Return an error if fetching the token fails
-        pass
+    # Proceed to fetch the token
+    oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
+    session['access_token'] = oauth_flow.credentials.token
+    return(oauth_flow.credentials.token)
 
     # find or create the user in the database
     user_info = get_user_info(session["access_token"])
