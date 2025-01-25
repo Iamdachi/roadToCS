@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, redirect, session, flash, url_for, request, render_template
-import google_auth_oauthlib.flow
+from oauthlib.oauth2 import WebApplicationClient
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user,\
     current_user, login_required
@@ -19,17 +19,18 @@ app.config['PREFERRED_URL_SCHEME'] = 'https'
 
 db = SQLAlchemy(app)
 login = LoginManager(app)
+# login_manager.init_app(app)
 login.login_view = 'index'
 
-# `GOOGLE_APIS_OAUTH_SECRET` contains the contents of a JSON file to be downloaded from the Google Cloud Credentials panel.
-oauth_config = json.loads(os.environ['GOOGLE_OAUTH_SECRETS'])
-
-# This sets up a configuration for the OAuth flow
-oauth_flow = google_auth_oauthlib.flow.Flow.from_client_config(
-    oauth_config,
-    # scopes define what APIs you want to access on behalf of the user once authenticated
-    scopes=["https://www.googleapis.com/auth/userinfo.email", "openid"]
+# Auth Config
+# Configuration
+GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
+GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+GOOGLE_DISCOVERY_URL = (
+    "https://accounts.google.com/.well-known/openid-configuration"
 )
+
+client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 # Association table for the many-to-many relationship
 user_lectures = db.Table(
@@ -103,13 +104,18 @@ def load_user(id):
 # It will redirect to the Google login service at the `authorization_url`. The `redirect_uri` is the URI which the Google service will use to redirect back to this app.
 @app.route('/signin')
 def signin():
-    # We rewrite the URL from http to https because inside the Repl http is used, 
-    # but externally it's accessed via https, and the redirect_uri has to match that
-    oauth_flow.redirect_uri = url_for('oauth2callback', _external=True, _scheme="https").replace('http://', 'https://')
-    authorization_url, state = oauth_flow.authorization_url()
-    session['state'] = state
-    
-    return redirect(authorization_url)
+    # Find out what URL to hit for Google login
+    google_provider_cfg = get_google_provider_cfg()
+    authorization_endpoint = google_provider_cfg["authorization_endpoint"]
+
+    # Use library to construct the request for Google login and provide
+    # scopes that let you retrieve user's profile from Google
+    request_uri = client.prepare_request_uri(
+        authorization_endpoint,
+        redirect_uri=request.base_url + "/callback",
+        scope=["openid", "email", "profile"],
+    )
+    return redirect(request_uri)
 
 # This is the endpoint that Google login service redirects back to. It must be added to the "Authorized redirect URIs"
 # in the API credentials panel within Google Cloud. It will call a Google endpoint to request
@@ -117,19 +123,49 @@ def signin():
 # APIs on behalf of the user.
 @app.route('/oauth2callback')
 def oauth2callback():
-    # Check if the state is in the session and matches the state from the callback
-    if 'state' not in session or session['state'] != request.args['state']:
-        return 'Invalid or missing state parameter', 400  # 400 Bad Request if state is missing or incorrect
+    # Get authorization code Google sent back to you
+    code = request.args.get("code")
 
-    # Proceed to fetch the token
-    oauth_flow.redirect_uri = url_for('oauth2callback', _external=True, _scheme="https").replace('http://', 'https://')
-    oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
-    session['access_token'] = oauth_flow.credentials.token
-    #return(oauth_flow.credentials.token)
+    # Find out what URL to hit to get tokens that allow you to ask for
+    # things on behalf of a user
+    google_provider_cfg = get_google_provider_cfg()
+    token_endpoint = google_provider_cfg["token_endpoint"]
 
-    # find or create the user in the database
-    user_info = get_user_info(session["access_token"])
-    email = user_info['email']
+    # Prepare and send a request to get tokens! Yay tokens!
+    token_url, headers, body = client.prepare_token_request(
+        token_endpoint,
+        authorization_response=request.url,
+        redirect_url=request.base_url,
+        code=code
+    )
+    token_response = requests.post(
+        token_url,
+        headers=headers,
+        data=body,
+        auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
+    )
+
+    # Parse the tokens!
+    client.parse_request_body_response(json.dumps(token_response.json()))
+
+    # Now that you have tokens (yay) let's find and hit the URL
+    # from Google that gives you the user's profile information,
+    # including their Google profile image and email
+    userinfo_endpoint = google_provider_cfg["userinfo_endpoint"]
+    uri, headers, body = client.add_token(userinfo_endpoint)
+    userinfo_response = requests.get(uri, headers=headers, data=body)
+
+    # You want to make sure their email is verified.
+    # The user authenticated with Google, authorized your
+    # app, and now you've verified their email through Google!
+
+    email = ""
+    if userinfo_response.json().get("email_verified"):
+        email = userinfo_response.json()["email"]
+    else:
+        return "User email not available or not verified by Google.", 400
+
+
     user = db.session.scalar(db.select(User).where(User.email == email))
     if user is None:
         user = User(email=email, username=email.split('@')[0])
@@ -172,6 +208,7 @@ def get_user_info(access_token):
         return None
 
 @app.route('/logout')
+@login_required
 def logout():
     session.clear()
     logout_user()
