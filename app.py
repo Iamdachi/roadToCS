@@ -186,10 +186,11 @@ def oauth2callback():
 # It shows the user info's information if they already are.
 @app.route('/')
 def welcome():
-    if "access_token" in session:
-        user_info = get_user_info(session["access_token"])
-        if user_info:
-            return render_template("index.html")
+    #if "access_token" in session:
+
+        #user_info = get_user_info(session["access_token"])
+        #if user_info:
+        #    return render_template("index.html")
     return render_template("index.html")
 
 @app.route('/about')
