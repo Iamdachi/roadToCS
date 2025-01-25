@@ -14,7 +14,6 @@ app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_NAME'] = 'your_session_cookie'
 app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 app.config['SESSION_TYPE'] = 'filesystem'
-#Session(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['PREFERRED_URL_SCHEME'] = 'https'
 
@@ -126,6 +125,7 @@ def oauth2callback():
         # Proceed to fetch the token
         oauth_flow.fetch_token(authorization_response=request.url.replace('http:', 'https:'))
         session['access_token'] = oauth_flow.credentials.token
+        return(oauth_flow.credentials.token)
     except Exception as e:
         #return f"Error during OAuth flow: {str(e)} and session state is {session['state']} compared to requests {request.args['state']}", 500 # Return an error if fetching the token fails
         pass
@@ -199,10 +199,7 @@ def get_lectures_data():
                 lId = name.split('_')[1]
 
                 lectures[str(cId)][int(lId)]["done"] = True
-
     return jsonify(lectures)
-
-
 
 with app.app_context():
     db.drop_all()  # Drops all tables DELETE THIS LINE LATER!!!
