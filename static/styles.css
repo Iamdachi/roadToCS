@@ -146,7 +146,7 @@ p a {
 /* Main Content */
 #about-content {
     overflow-y: auto;
-    margin-top: 100px;
+    margin-top: 30px;
     text-align: justify; /* For better readability */
     color: white; /* White text color */
     font-family: 'Arial', sans-serif; /* Or use any other font */
