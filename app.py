@@ -246,6 +246,11 @@ def get_lectures_data():
 def favicon():
     return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
 with app.app_context():
     db.drop_all()  # Drops all tables DELETE THIS LINE LATER!!!
     db.create_all()  # Creates tables again
