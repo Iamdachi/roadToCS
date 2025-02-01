@@ -243,7 +243,7 @@ def get_lectures_data():
     return jsonify(lectures)
 
 @app.route('/static/favicon.ico')
-def favicon():
+def favicon_two():
     return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/favicon.ico')
