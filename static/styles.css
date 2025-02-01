@@ -146,7 +146,8 @@ p a {
 /* Main Content */
 #about-content {
     overflow-y: auto;
-    margin-top: 30px;
+    padding: 20px;
+    margin-top: 50px;
     text-align: justify; /* For better readability */
     color: white; /* White text color */
     font-family: 'Arial', sans-serif; /* Or use any other font */
@@ -160,7 +161,6 @@ p a {
 }
 
 #about-content p {
-    margin-bottom: 20px;
   white-space: pre-line;
   margin: 10px 20px 30px;
 }
