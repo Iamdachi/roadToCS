@@ -242,7 +242,7 @@ def get_lectures_data():
                 lectures[str(cId)][int(lId)]["done"] = True
     return jsonify(lectures)
 
-@app.route('/favicon.ico')
+@app.route('/static/favicon.ico')
 def favicon():
     return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
