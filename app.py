@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, redirect, session, flash, url_for, request, render_template
+from flask import Flask, jsonify, redirect, session, flash, url_for, request, render_template, send_from_directory
 from oauthlib.oauth2 import WebApplicationClient
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user,\
@@ -241,6 +241,10 @@ def get_lectures_data():
 
                 lectures[str(cId)][int(lId)]["done"] = True
     return jsonify(lectures)
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 with app.app_context():
     db.drop_all()  # Drops all tables DELETE THIS LINE LATER!!!
