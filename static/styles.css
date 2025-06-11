@@ -152,7 +152,7 @@ p a {
     text-align: justify; /* For better readability */
     color: white; /* White text color */
     font-family: 'Arial', sans-serif; /* Or use any other font */
-    width: 100%;
+    width: 80%;
 }
 
 #about-content p h2 {
