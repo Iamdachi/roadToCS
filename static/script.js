@@ -253,6 +253,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     draw(data, lectures); // Now `lectures` is guaranteed to be available
     setTimeout(() => drawPaths(paths), 0); // Ensure paths are drawn after rects
+
+    // adjust:
+    // Automatically zoom and pan to fit from x = 100 to x = 2050
+    const svg = d3.select('svg');
+    const svgNode = svg.node();
+    const g = svg.select('g');
+
+    const viewWidth = svgNode.clientWidth || svgNode.getBoundingClientRect().width;
+    const minX = 100;  // left margin
+    const maxX = 2050; // right margin
+    const dataWidth = maxX - minX;
+
+    const scale = viewWidth / dataWidth;
+
+    // Limit scale to within zoom extent
+    const clampedScale = Math.max(0.25, Math.min(10, scale));
+
+    // Calculate translation
+    const translateX = -minX * clampedScale;
+    const transform = d3.zoomIdentity.translate(translateX, 0).scale(clampedScale);
+
+    // Apply the transform
+    svg.transition()
+      .duration(750)
+      .call(zoom.transform, transform);
   }).catch(error => {
     console.error("Error loading data:", error);
   });
