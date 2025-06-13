@@ -112,7 +112,7 @@ function draw(data, lectures) {
             .attr('y', d.y + 50)
             .attr('width', 0)
             .attr('height', 10)
-            .attr('fill', '#81B29A')
+            .attr('fill', '#12dd00')
             .attr('rx', 5)
             .attr('ry', 5)
             .attr('class', `progress-bar-${i}`);
