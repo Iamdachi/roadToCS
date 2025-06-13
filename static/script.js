@@ -75,7 +75,7 @@ function draw(data, lectures) {
             .attr('y', d.y)
             .attr('width', 250)
             .attr('height', 80)
-            .attr('fill', '#E07A5F')
+            .attr('fill', '#bc0000')
             .attr('rx', 20)
             .attr('ry', 20)
             .attr('id', `n${i}`);
