@@ -103,7 +103,7 @@ function draw(data, lectures) {
             .attr('y', d.y + 50)
             .attr('width', 230)
             .attr('height', 10)
-            .attr('fill', 'white')
+            .attr('fill', '#101010')
             .attr('rx', 5)
             .attr('ry', 5);
 
